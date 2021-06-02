@@ -254,5 +254,5 @@ A High Order Function (H.O.F.), is a function that receives another function as 
   print(odd)
   ```
 
-​    Every value whose doesn't return Truen after passing through the function, will be remove and not be returned by the `filter()` function. The objects returned by the function `filter()` is an object `<class 'filter'>`, 
+​    Every value whose doesn't return Truen after passing through the function, will be remove and not be returned by the `filter()` function. The objects returned by the function `filter()` is an object `<class 'filter'>`
 
