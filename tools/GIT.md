@@ -61,6 +61,10 @@ $ git push origin :nombre-rama
 
 ---
 
+
+
+# Commits
+
 ## Historial de commits.
 
 ```git
@@ -211,3 +215,36 @@ $ git reset HEAD <file>
 ```
 
 ​	Devuelve el archivo a su último commit y este sigue en seguimiento por git, es decir se podrá hacer `add`, `commit`, etc. luego de ejecutar el comando. 
+
+
+
+# Errores.
+
+## Git branch upstreams.
+
+```git
+$ git pull
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> master
+```
+
+​	Esto ocurre porque git es una pesadilla, y no permite hacer pull porque no sabe a que rama remota esta conectada esta rama local, por lo que no sabe de donde hacer pull, pero solucionarlo es facil.
+​	La siguiente linea de codigo esta escrita pensando en la rama 'master', si el problema ocurre con otra rama, basta con cambiar 'master', con todo y comillas, por el nombre de la rama problematica, tambien entre comillas.
+
+```git
+git branch --set-upstream-to=origin/master Branch 'master' set up to track remote branch 'master' from 'oring'
+```
+
+```
+git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
+```
+
+​	Al ejecutar cualquiera de estos codigos, se modificará el archivo `config` dentro de la carpeta oculta `.git`. 
+

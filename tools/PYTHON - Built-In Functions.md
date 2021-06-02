@@ -194,7 +194,7 @@ object.name
 
 ​    It's a function that is defined without a identification name and its writed in one single line, with just one expression and just once.
 
-​    An anonymous functions is a short way to define functions that will be used once and whose returned value will be used as a variable. Tha anonymous functions are defined using the lambda keyword and these functions don't need to be defined or named afted and they are for one-time usage.
+​    An anonymous functions is a short way to define functions that will be used once and whose returned value will be used as a variable. Tha anonymous functions are defined using the [`lambda`](https://realpython.com/python-lambda/) keyword and these functions don't need to be defined or named afted and they are for one-time usage.
 
 - **Syntax:**
 
@@ -206,7 +206,7 @@ object.name
   <identificator(parameter)>
   ```
 
-  ​	When the anonymous function is defined within a variable with an identifying name, this name isn't for the function, the name is the identifier of a variable that contains a **function object** whose value,  that of the variable, is the returned value by the lambda function.
+  ​	When the anonymous function is defined within a variable with an identifying name, this name isn't for the function, the name is the identifier of a variable that contains a **function object** whose value,  that of the variable, is the returned value by the [`lambda`](https://realpython.com/python-lambda/) function.
 
   ​	In other words, when you invoke the variable with a parameter in parentheses, you are not invoking a function, you simply define the `function object` with the entered parameter, and it redefines the variable with the value returned. 
 
@@ -242,7 +242,7 @@ A High Order Function (H.O.F.), is a function that receives another function as 
 
   
 
-​    `	filter (function, iterable)` is a function that receives two parameters, a function thats return a boolean value and an iterable object, where the function determines which values within the iterable will remain, depending of the value returned when every value passing through the function. if the value returned is true, the value remains in the iterable object.
+​    `	filter (function, iterable)` is a function that receives two parameters, a function thats return a boolean value and an iterable object, where the function determines which values within the [iterable](https://docs.python.org/3/glossary.html#term-iterable) will remain, depending of the value returned when every value passing through the function. if the value returned is true, the value remains in the iterable object.
 
 ​	Note that `list_var = list(filter(function, iterable))` is equivalent to the generator expression: `list_var = (item for item in iterable if function(item))` if function is not `None` and `(item for item in iterable if item)` if function is `None`.
 
@@ -255,4 +255,77 @@ A High Order Function (H.O.F.), is a function that receives another function as 
   ```
 
 ​    Every value whose doesn't return Truen after passing through the function, will be remove and not be returned by the `filter()` function. The objects returned by the function `filter()` is an object `<class 'filter'>`
+
+
+
+## map()
+
+- **Syntax:** 
+
+  ```python
+  map(function, iterable)
+  var_list = list(map(function, iterable))
+  var_tuple = tuple(map(function, iterable))
+  ```
+
+  ​    This function apply a given function to every item within an [iterable](https://docs.python.org/3/glossary.html#term-iterable) object and Return an object `<class 'map'>` thats is convertible to a iterable object like a `list()` or `tuple()`.
+
+  ​    If additional *iterable* arguments are passed, *function* must take that many arguments and is applied to the items from all iterables in parallel. With multiple iterables, the iterator stops when the shortest [iterable](https://docs.python.org/3/glossary.html#term-iterable) is exhausted.
+
+- **Examples:**
+
+  ```python
+  numbers = (1, 2, 3, 4)
+  result = map(lambda x: x*x, numbers)
+  print(result)
+  
+  # converting map object to set
+  numbersSquare = set(result)
+  print(numbersSquare)
+  
+  #-------------------------------------
+  
+  num1 = [4, 5, 6]
+  num2 = [5, 6, 7]
+  
+  result = map(lambda n1, n2: n1+n2, num1, num2)
+  print(list(result))
+  ```
+
+  
+
+## reduce()
+
+- **Syntax:**
+
+  ```python
+  from functools import reduce
+  
+  reduce(function, iterable)
+  ```
+
+  
+
+​    This function receives as parameters, an iterable object and a function, and reduce the lists of items to a single cumulative value. [`reduce()`](https://realpython.com/python-reduce-function/#getting-started-with-pythons-reduce) operates on any [iterable](https://docs.python.org/3/glossary.html#term-iterable), not just lists. 
+
+​    The function apply the function inserted to the firts two items in an iterable and generate a partial result, then use that partial result, together with the third item in the iterable to generate another partial result and repeat the process until the iterable is exhausted and then return a single cumulative value.
+
+​    [`reduce()`](https://realpython.com/python-reduce-function/#getting-started-with-pythons-reduce) was originally a built-in function (and still is in [Python 2.x](https://docs.python.org/2/library/functions.html#reduce)), but it was moved to `functools.reduce()` module in [Python 3.0](https://docs.python.org/3/whatsnew/3.0.html#builtins). This decision was based on some possible performance and readability issues.
+
+- **Examples:**
+
+  ```
+  from functools import reduce
+  
+  numbers = [3, 5, 2, 4, 7, 1]
+  
+  # Minimum
+  reduce(lambda a, b: a if a < b else b, numbers)
+  
+  
+  # Maximum
+  reduce(lambda a, b: a if a > b else b, numbers)
+  ```
+
+**Use a dedicated function** to solve use cases for Python’s `reduce()` whenever possible. Functions such as `sum()`, `all()`, `any()`, `max()`, `min()`, `len()`, `math.prod()`, and so on will make your code faster and more readable and maintainable.
 
