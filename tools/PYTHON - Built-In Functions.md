@@ -187,3 +187,72 @@ object.name
 | [`classmethod()`](https://docs.python.org/3/library/functions.html#classmethod) | [`getattr()`](https://docs.python.org/3/library/functions.html#getattr) | [`locals()`](https://docs.python.org/3/library/functions.html#locals) | [`repr()`](https://docs.python.org/3/library/functions.html#repr) | [`zip()`](https://docs.python.org/3/library/functions.html#zip) |
 | [`compile()`](https://docs.python.org/3/library/functions.html#compile) | [`globals()`](https://docs.python.org/3/library/functions.html#globals) | [`map()`](https://docs.python.org/3/library/functions.html#map) | [`reversed()`](https://docs.python.org/3/library/functions.html#reversed) | [`__import__()`](https://docs.python.org/3/library/functions.html#__import__) |
 | [`complex()`](https://docs.python.org/3/library/functions.html#complex) | [`hasattr()`](https://docs.python.org/3/library/functions.html#hasattr) | [`max()`](https://docs.python.org/3/library/functions.html#max) | [`round()`](https://docs.python.org/3/library/functions.html#round) |                                                              |
+
+
+
+# Anonymous Functions (lambda).
+
+​    It's a function that is defined without a identification name and its writed in one single line, with just one expression and just once.
+
+​    An anonymous functions is a short way to define functions that will be used once and whose returned value will be used as a variable. Tha anonymous functions are defined using the lambda keyword and these functions don't need to be defined or named afted and they are for one-time usage.
+
+- **Syntax:**
+
+  ```python
+  lambda <parameter>: <expression>
+  
+  # When the function defines the value of a variable.
+  <identificator> = lambda <parameter>: <expression> 
+  <identificator(parameter)>
+  ```
+
+  ​	When the anonymous function is defined within a variable with an identifying name, this name isn't for the function, the name is the identifier of a variable that contains a **function object** whose value,  that of the variable, is the returned value by the lambda function.
+
+  ​	In other words, when you invoke the variable with a parameter in parentheses, you are not invoking a function, you simply define the `function object` with the entered parameter, and it redefines the variable with the value returned. 
+
+  
+
+- **Example:**
+
+  ```python
+  def palindrome(string):
+      return string == string[::-1]
+  print(palindrome('ana'))
+  
+  # lambda function:
+  palindrome = lambda string: string == string[::-1]
+  print(palindrome('ana'))
+  ```
+
+  
+
+  # High Order Functions.
+
+A High Order Function (H.O.F.), is a function that receives another function as a parameter.
+
+## filter()
+
+- **Syntax:**
+
+  ```python
+  filter(function, iterable)
+  var_list = list(filter(function, iterable))
+  var_tuple = tuple(filter(function, iterable))
+  ```
+
+  
+
+​    `	filter (function, iterable)` is a function that receives two parameters, a function thats return a boolean value and an iterable object, where the function determines which values within the iterable will remain, depending of the value returned when every value passing through the function. if the value returned is true, the value remains in the iterable object.
+
+​	Note that `list_var = list(filter(function, iterable))` is equivalent to the generator expression: `list_var = (item for item in iterable if function(item))` if function is not `None` and `(item for item in iterable if item)` if function is `None`.
+
+- **Example:**
+
+  ```python
+  obj_iterable = [1, 2, 3, 4, 5]
+  odd = list(filter(lambda x: x%2 != 0, obj_iterable))
+  print(odd)
+  ```
+
+​    Every value whose doesn't return Truen after passing through the function, will be remove and not be returned by the `filter()` function. The objects returned by the function `filter()` is an object `<class 'filter'>`, 
+
