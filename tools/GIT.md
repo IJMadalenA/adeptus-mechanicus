@@ -45,7 +45,7 @@ $ git push origin :nombre-rama
 
 ---
 
-## merge
+## Merge
 
 ### Tipos de merge.
 
@@ -100,7 +100,7 @@ $ git log --oneline -number
 $ git log --stat
 ```
 
-​	Permite desplegar una lista de commits mas detallada que muestra los archivos que forman parte del commit.
+​	Junto con la información habitual de `git log`, se incluye información sobre los archivos que se han modificado y el número relativo de líneas que se han añadido o eliminado en cada uno de ellos.
 
 > *Nota:* Para salir de la lista de commits presiona la tecla 'q' 
 
@@ -108,9 +108,7 @@ $ git log --stat
 $ git log -p
 ```
 
-​	permite ver exactamente que cambios se realizaron en cada archivo.
-
-
+Esta opción muestra el parche que representa cada confirmación. Se muestra la diferencia completa de cada confirmación, que es la vista más detallada que puedes tener del historial del proyecto.
 
 ---
 
@@ -192,5 +190,24 @@ $ git diff id_1 id_2
 
 ---
 
+## Eliminar commits.
+
+```git 
+$ git rm --cached
+```
+
+​	Elimina los archivo del área de Staging, es decir, todos los archivos añadidos al commit realizado y almacenados en el indice de git, pero dejando intacta la copia de trabajo local. Es util cuando se realiza un commit incompleto o en el que se añade un fichero erroneo. 
 
 
+
+---
+
+
+
+## Regresar a un commit anterior.
+
+```git
+$ git reset HEAD <file>
+```
+
+​	Devuelve el archivo a su último commit y este sigue en seguimiento por git, es decir se podrá hacer `add`, `commit`, etc. luego de ejecutar el comando. 
