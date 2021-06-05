@@ -328,6 +328,7 @@ A High Order Function (H.O.F.), is a function that receives another function as 
   ```
 
 **Use a dedicated function** to solve use cases for Python’s `reduce()` whenever possible. Functions such as `sum()`, `all()`, `any()`, `max()`, `min()`, `len()`, `math.prod()`, and so on will make your code faster and more readable and maintainable.
+<<<<<<< HEAD
 
 
 
@@ -345,4 +346,6 @@ A High Order Function (H.O.F.), is a function that receives another function as 
 ```python
 with open(".route/of/file.txt", "<opening_mode>", encoding = '<encoding_type') as <optional_name>:
 ```
+=======
+>>>>>>> master
 
