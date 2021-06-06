@@ -45,9 +45,9 @@ $ git push origin :nombre-rama
 
 ---
 
-## Merge
+# Merge
 
-### Tipos de merge.
+## Tipos de merge.
 
 ​	Existen al menos tres posibles resultados cuando hacemos un merge:
 
@@ -57,13 +57,31 @@ $ git push origin :nombre-rama
 
 - **Merge con conflictos**: cuando se presenta un merge con conflictos por resolver, siempre **se crea un nuevo commit** que representa la solución de los conflictos.
 
+---
 
+# add
+
+​    Cuando ejecutamos el comando `git add` seguido del archivo o los archivos editados, estos son guardados en  el area de `staging`, que es un area en memoria RAM que almacena todos los cambios añadidos que aun no son enviador al repositorio por el comando `git commit`.
+
+## Eliminar un archivo en staging.
+
+```git
+$ git rm --cached archivo.tipo
+```
+
+​    Para conocer los archivos añadidos al area de staging utilizamos el comando `git status` o `git status -s` para un  a vista resumida en una linea. 
+
+​    Este comando permite eliminar archivos de git sin eliminar su historial del sistema de versiones, es decir que, solo eliminamos su representación en el staging, no lo hacemos enteramente del proyecto o del historial de git.
+
+```git
+$ git rm --force archivo.tipo
+```
+
+​    Elimina el o los archivos del area de staging de git y tambien del disco duro. Aunque podríamos recuperarlo regresando a versiones anteriores.    
 
 ---
 
-
-
-# Commits
+# Commits.
 
 ## Historial de commits.
 
@@ -180,6 +198,18 @@ $ git log --oneline -- file.type
 
 ---
 
+## Cambios en el ultimo commit.
+
+```git
+git show nombre_del_archivo.tipo
+```
+
+​    Permite ver los cambios realizador en el ultimo commit en comparación al ultimo realizado. 
+
+> Nota: El archivo se debe de indicar con el nombre entero y el tipo. ejemplo: archivo.txt 
+
+---
+
 ## Comparar commits.
 
 ```git
@@ -211,40 +241,36 @@ $ git rm --cached
 ## Regresar a un commit anterior.
 
 ```git
-$ git reset HEAD <file>
+$ git reset <commit_id> 
+```
+
+​    Con el comando `git reset` podemos volver hacia el pasado hasta el comit que indiquemos, aunque existen dis tipos especificos de `reset`, el `--soft` y el `--hard`. 
+
+> Nota: El comando `git reset` nos permite viajar hacia el pasado hacia una versión anterior de nuestro proyecto de git, pero sin la posibilidad de regresar al presente, ya que elimina toda la información porterior al commit que indiquemos como destino. 
+
+   ```git
+   $ git reset <commit_id> --soft
+   ```
+
+​    Nos regresa hacia  el commit indicado aunque manteniendo intacto todos los archivos que hayamos añadidos al staging, es decir, solo se notarán aquellas diferencias que no estén en el area de staging, cualquier archivo que no este siendo rastreado por git va a permanecer, mientras que el resto de archivos regresarán al estado que tenían en el commit indicado como destino .
+
+```git
+$ git reset <commit_id> --hard
+```
+
+​    Nos regresa hacia el commit anterior indicado eliminando todos los cambios realizados incluyendo los archivos añadidos al area de staging, es una forma efectiva aunque agresiva de regresar al pasado en el codigo..
+
+```git
+$ git reset HEAD <commit_id>
+
+$ git reset --hard HEAD       
+ #(going back to HEAD)
+
+$ git reset --hard HEAD^      
+ #(going back to the commit before HEAD)
+
+$ git reset --hard HEAD^2     
+ #(going back two commits before HEAD)
 ```
 
 ​	Devuelve el archivo a su último commit y este sigue en seguimiento por git, es decir se podrá hacer `add`, `commit`, etc. luego de ejecutar el comando. 
-
-
-
-# Errores.
-
-## Git branch upstreams.
-
-```git
-$ git pull
-There is no tracking information for the current branch.
-Please specify which branch you want to merge with.
-See git-pull(1) for details
-
-    git pull <remote> <branch>
-
-If you wish to set tracking information for this branch you can do so with:
-
-    git branch --set-upstream-to=origin/<branch> master
-```
-
-​	Esto ocurre porque git es una pesadilla, y no permite hacer pull porque no sabe a que rama remota esta conectada esta rama local, por lo que no sabe de donde hacer pull, pero solucionarlo es facil.
-​	La siguiente linea de codigo esta escrita pensando en la rama 'master', si el problema ocurre con otra rama, basta con cambiar 'master', con todo y comillas, por el nombre de la rama problematica, tambien entre comillas.
-
-```git
-git branch --set-upstream-to=origin/master Branch 'master' set up to track remote branch 'master' from 'oring'
-```
-
-```
-git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
-```
-
-​	Al ejecutar cualquiera de estos codigos, se modificará el archivo `config` dentro de la carpeta oculta `.git`. 
-
