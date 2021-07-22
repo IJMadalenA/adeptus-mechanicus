@@ -406,7 +406,7 @@ $\gamma$
 
 
 ## DIAGRAMS
-[typora.io](https://support.typora.io/Draw-Diagrams-With-Markdown/)
+[Draw Diagrams With Markdown - typora.io](https://support.typora.io/Draw-Diagrams-With-Markdown/)
 
 ### SEQUENCE DIAGRAMS
 
