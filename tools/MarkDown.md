@@ -312,13 +312,13 @@ for i in range(10):
 
 ```markdown
   **Header 1** |**Header 2**  | **Header 3**
-   :---: | :---: | :---:
+   :---: | :--- | ---:
   data 1.1|data 2.1|data 3.1
   data 1.2|data 2.2|data 3.2
 ```
 
 **Header 1** |**Header 2**  | **Header 3**
-   :---: | :---: | :---: 
+   :---: | :--- | ---: 
   data 1.1|data 2.1|data 3.1
   data 1.2|data 2.2|data 3.2
 
@@ -393,18 +393,99 @@ $\gamma$
 ​	[Emoji's list](https://www.webfx.com/tools/emoji-cheat-sheet/)
 
 ```markdown
-:+1:
-:fire:
-:metal:
-:rooster:
-:zap:
+:+1:, :fire:, :metal:, :rooster:, :zap:
 ```
 
-:+1:
-:fire:
-:metal:
-:rooster:
-:zap:
+:+1:, :fire:, :metal:, :rooster:, :zap:
+
 
 ---
+
+
+
+## DIAGRAMS
+[typora.io](https://support.typora.io/Draw-Diagrams-With-Markdown/)
+
+### SEQUENCE DIAGRAMS
+
+This feature uses [js-sequence](https://bramp.github.io/js-sequence-diagrams/), which turns the following code block into a rendered diagram:
+
+~~~gfm
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+~~~
+
+```sequence
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
+### Flowcharts
+
+This feature uses [flowchart.js](http://flowchart.js.org/), which turns the following code block into a rendered diagram:
+
+~~~gfm
+```flow
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+~~~
+
+```flow
+st=>start: Start
+op=>operation: Your Operation
+cond=>condition: Yes or No?
+e=>end
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+### Mermaid
+
+Typora also has integration with [mermaid](https://mermaid-js.github.io/mermaid/#/), which supports sequence diagrams, flowcharts, Gantt charts, class and state diagrams, and pie charts.
+
+#### Sequence Diagrams
+
+For more details see [these instructions](https://mermaid-js.github.io/mermaid/#/sequenceDiagram).
+
+~~~gfm
+```mermaid
+%% Example of sequence diagram
+  sequenceDiagram
+    Alice->>Bob: Hello Bob, how are you?
+    alt is sick
+    Bob->>Alice: Not so good :(
+    else is well
+    Bob->>Alice: Feeling fresh like a daisy
+    end
+    opt Extra response
+    Bob->>Alice: Thanks for asking
+    end
+```
+~~~
+```mermaid
+%% Example of sequence diagram
+  sequenceDiagram
+    Alice->>Bob: Hello Bob, how are you?
+    alt is sick
+    Bob->>Alice: Not so good :(
+    else is well
+    Bob->>Alice: Feeling fresh like a daisy
+    end
+    opt Extra response
+    Bob->>Alice: Thanks for asking
+    end
+```
 

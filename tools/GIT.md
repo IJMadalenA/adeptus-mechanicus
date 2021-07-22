@@ -104,6 +104,17 @@ $ git log --oneline --graph
 
 ​	Permite desplegar una lista resumida con una representación grafica del esquema que siguen los commits.
 
+```git
+git log --stat
+```
+
+​    Muestra el numero de lineas que se han cambiado de forma resumida.
+
+```git 
+```
+
+
+
 
 
 ```git
