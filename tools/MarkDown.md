@@ -75,7 +75,7 @@ __This will also be bold__
 
 ### URL LINKS
 
-​	Inline links contains text which displayed to user enclosed in square brackets `[]` and link URL enclosed in parens `()` Links Url is absolute URL like domainname.
+​	Inline links contains text which displayed to user enclosed in square brackets `[]` and link URL enclosed in parens `()` Links Url is absolute URL like domain name.
 
 ```markdown
   [Text displayed](https://www.w3schools.io/file/markdown-introduction/)
@@ -216,7 +216,7 @@ __This will also be bold__
 ​	For a **inline code blocks**, wrap them in backticks   `   .
 
 ```python
-	`num_list = [i for i in range(10)]`
+	num_list = [i for i in range(10)]
 ```
 `num_list = [i for i in range(10)]`
 
@@ -225,15 +225,17 @@ __This will also be bold__
 ​	If you'd like to use syntax highlighting, include the language in te first line, after de bacticks.
 
 ```python
-    num_list = []
-    for i in range(10):
-    	num_list.append(i)
+num_list = []
+
+for i in range(10):
+    num_list.append(i)
 ```
 
 ​	Or you can indent with for spaces.
 
 ```python
 num_list = []
+
 for i in range(10):
 	num_list.append(i)
 ```
