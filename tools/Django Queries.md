@@ -382,4 +382,3 @@ Company.objects.order_by(F('last_contacted').desc(nulls_last=True))
 ​	Es la interface entre Django y la base de datos. 
 
 ​	Existe al menos un administrados para cada modelo en una aplicación Django.
-
