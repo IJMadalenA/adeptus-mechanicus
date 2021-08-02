@@ -1,0 +1,7 @@
+# ContentTypes.
+
+
+
+## Relaciones Genéricas.
+
+​	
