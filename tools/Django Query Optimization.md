@@ -497,7 +497,41 @@ prefetch_related_objects(restaurants, 'pizzas__toppings')
 <QuerySet [{'entry__authors': 1, 'entries': 33}]>
 ```
 
+- __Consideraciones al momento de utilizar este método:__
 
+   - Los valores que sean una `FK` y sean llamados directamente sin acceder al modelo que los alberga, serán representados por su `id`.
+
+   - Llamas al método `.only()` y al método `.defer()` después que `.values()` no tiene sentido y generará un `TypeError`.
+
+   - La combinación de transformaciones y agregaciones requiere el uso de dos llamadas `.annotate()`, ya sea explícitamente o como argumentos para `.values()`. por ejemplo:
+
+      ```python
+      >>> from django.db.models import CharField, Count
+      >>> from django.db.models.functions import Lower
+      
+      >>> CharField.register_lookup(Lower)
+      >>> Blog.objects.values('entry__authors__name__lower').annotate(entries=Count('entry'))
+      <QuerySet [{'entry__authors__name__lower': 'test author', 'entries': 33}]>
+      
+      >>> Blog.objects.values(
+      ...     entry__authors__name__lower=Lower('entry__authors__name')
+      ... ).annotate(entries=Count('entry'))
+      <QuerySet [{'entry__authors__name__lower': 'test author', 'entries': 33}]>
+      
+      >>> Blog.objects.annotate(
+      ...     entry__authors__name__lower=Lower('entry__authors__name')
+      ... ).values('entry__authors__name__lower').annotate(entries=Count('entry'))
+      <QuerySet [{'entry__authors__name__lower': 'test author', 'entries': 33}]>
+      ```
+
+   - Es posible llamar a funciones `.filter()`, `.order_by()`, etc. después de la función `.values()`.
+
+      ```python
+      Blog.objects.values().order_by('id')
+      Blog.objects.order_by('id').values()
+      ```
+
+   - La sabia gente que creo Django prefieren colocar de primero a todos lo métodos que afecten a SQL, seguidos (preferiblemente) por cualquier método que afecte a la salida (como `.values()`), pero en realidad no importa.
 
 ---
 
@@ -505,6 +539,87 @@ prefetch_related_objects(restaurants, 'pizzas__toppings')
 
 #### `.values_list()`
 
+`QuerySet.values_list(*fields, flat=bool, named=bool)`
 
+​	Es una función similar a `.values()` exceptuando que esta función en vez de retornar un diccionario o una lista de diccionarios retornar una tupla o una lista de tuplas. Cada tupla contiene el valor de los campos de la instancia en el orden en el que están establecidos. 
+
+```python
+>>> from django.db.models.functions import Lower
+
+>>> Entry.objects.values_list('id', Lower('headline'))
+<QuerySet [(1, 'first entry'), ...]>
+
+>>> Entry.objects.values_list('id', 'headline')
+<QuerySet [(1, 'First entry'), ...]>
+```
+
+​	Al igual que en el método `.values()`, podemos especificar como un parámetro o como una lista de ellos a los campos que deseamos que sean retornados, y si solo especificamos un parámetro para que sea retornado, podemos definir al parámetro `flat` como `True`, para que solo nos retorne valores únicos.
+
+```python
+>>> Entry.objects.values_list('id').order_by('id')
+<QuerySet[(1,), (2,), (3,), ...]>
+
+>>> Entry.objects.values_list('id', flat=True).order_by('id')
+<QuerySet [1, 2, 3, ...]>
+
+>>> Entry.objects.values_list('headline', flat=True).get(pk=1)
+'First entry'
+```
 
 ---
+
+
+
+#### `.defer()`
+
+​	Este método especifica el nombre de los campos que no queremos que sean retornados. Es especialmente útil cuando la instancia que queremos retornar posee campos `TestField` muy extensos o muchos campos que no necesitamos utilizar. 
+
+```python
+Entry.objects.defer("headline", "body")
+```
+
+​	Este método retorna un _QuerySet_ pero que no incluye los campos que especificamos como parámetros.
+
+---
+
+
+
+#### `.only()`
+
+​	Este método es prácticamente lo opuesto al método `.defer()`, ya que especifica los campos que quieres que sean devueltos en el _QuerySet_. Es útil cuando queremos obviar a la mayoría de campos, ya que nos ayuda a conseguir un código mas limpio y sencillo. 
+
+```python
+Person.objects.only("name")
+```
+
+__Cuando llamamos al método `.save()`de un instancia con campos diferidos, solo se guardarán los campos cargados.__
+
+---
+
+
+
+### No abuses de `.count()` y `.exists()`
+
+​	A pesar de los beneficios de optimización, hay casos en los que utilizar estos métodos implica una llamada innecesario al modelo, y para ello nos valemos del ilustrativo ejemplo de la documentación de Django.
+
+```python
+if display_emails:
+    emails = user.emails.all()
+    if emails:
+        print('You have', len(emails), 'emails:')
+        for email in emails:
+            print(email.subject)
+    else:
+        print('You do not have any emails.')
+```
+
+​	Para este ejemplo necesitamos identificar si un objeto existe o no y contar los objetos dentro de una variable, pero en este caso es mas óptimo utilizar el método `.__bool__()` y `len()`.
+
+- Dada la naturaleza _lazy_ de los _QuerySets_, no se realizará una consulta a la base de datos si display_emails es `False`. 
+- Al tener definida la _Query_ de `user.emails.all()` dentro de una variable, podemos reutilizar los datos almacenados en memoria.
+- La línea `if emails: ` hace que se llama al `QuerySet.__bool__()`, y si retorna `False`, no se realizará ninguna llamada a la base de datos, pero si es `True` si lo hará. 
+- El uso de `len (emails)` llama a `QuerySet .__ len __ ()`, reutilizando la caché de resultados.
+- El bucle `for` opera sobre la información ya almacenada en cache.
+
+​	En total este codito realiza o una o ninguna consulta a la base de datos, ya que el uso de los métodos `QuetySet.exists()` para el `if` o el uso del `QuerySet.count()` para el recuento de los emails, causaría consultas adicionales innecesarias.
+
