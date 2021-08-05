@@ -197,7 +197,9 @@ __Condiciones en la que un *QuerySet*  no se almacena en memoria__:
 
 ​	Acceder múltiples veces a la base de datos para obtener diferentes partes de un mismo objeto es mucho menos eficiente que recuperar el objeto entero directamente, esto puede ser especialmente importante cuando trabajamos con `FK` ya que tendemos ha realizar una segunda llamada a la base de datos para recuperar objetos relacionado.
 
-#### [`QuerySet.select_related()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.query.QuerySet.select_related)
+#### [`.select_related()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.query.QuerySet.select_related)
+
+​	`QuerySet.select_related(*fields)`
 
 ​	Este método retornará un `QuerySet` que incluya todos los objetos relacionados a través de una `FK` con el objeto principal de nuestra consulta. Esto resulta en una única consulta mas compleja pero que hará que no necesitemos volver a consultar a la base de datos para conseguir los objetos relacionados.
 
@@ -282,7 +284,44 @@ books = Book.objects.select_related('author').annotate(
 
 ​	Esta ultima _Query_, por muy compleja que parezca, solo representa una única llamada a la base de datos.
 
+---
 
+#### [`Prefetch()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.Prefetch)
+
+​	`class Prefetch(lookup, queryset=None, to_attr=None)`
+
+​	El objeto `Prefetch()` se puede utilizar para controlar la operación de `prefetch_related()`.
+
+​	El primer argumento, ___lookup___, describe las relaciones a seguir. Por ejemplo:
+
+```python
+>>> from django.db.models import Prefetch
+>>> Question.objects.prefetch_related(Prefetch('choice_set')).get().choice_set.all()
+	# Esto solo ejecutará 2 consultas, independientemente del numero de objetos en la Query.
+<QuerySet [<Choice: Not much>, <Choice: The sky>, <Choice: Just hacking again>]>
+	# El Query retorna un QuerySet con todas las respuestas relacionadas a la pregunta.
+
+>>> Question.objects.prefetch_related(Prefetch('choice_set')).all()
+<QuerySet [<Question: Hello>]>
+```
+
+​	El argumento ___queryset___ proporciona un _QuerySet_ base sobre el cual ejecutar la búsqueda. Esto es útil para filtrar aun más la operación de captación previa (o _`prefetch` operation_) o para llamar a `select_related()` desde esta relación, reduciendo así el número de consultas aún más. Por ejemplo:
+
+```python
+>>> voted_choices = Choice.objects.filter(votes__gt=0)
+>>> voted_choices
+<QuerySet [<Choice: The sky>]>
+
+>>> prefetch = Prefetch('choice_set', queryset=voted_choices)
+>>> Question.objects.prefetch_related(prefetch).get().choice_set.all()
+<QuerySet [<Choice: The sky>]>
+```
+
+
+
+
+
+---
 
 #### [`prefetch_related()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#prefetch-related)
 
@@ -296,3 +335,176 @@ books = Book.objects.select_related('author').annotate(
 
 > ​	Tanto  [`GenericRelation`](https://docs.djangoproject.com/es/3.2/ref/contrib/contenttypes/#django.contrib.contenttypes.fields.GenericRelation) y [`GenericForeignKey`](https://docs.djangoproject.com/es/3.2/ref/contrib/contenttypes/#django.contrib.contenttypes.fields.GenericForeignKey) son parte del concepto de Relaciones Genéricas, el cual, para no hacer aun mas largo este MD, se describen en un MD corto dedicado al tema.
 
+​	Este método puede ser confuso, así utilizaremos el ilustrador ejemplo de Django:
+
+```python
+from django.db import models
+
+class Topping(models.Model):
+    name = models.CharField(max_length=30)
+
+class Pizza(models.Model):
+    name = models.CharField(max_length=50)
+    toppings = models.ManyToManyField(Topping)
+
+    def __str__(self):
+        return "%s (%s)" % (
+            self.name,
+            ", ".join(topping.name for topping in self.toppings.all()),
+        )
+```
+
+​	En base a este modelo de ejemplo, en donde solo tenemos dos clases, una _Topping_ y otra _Pizza_, y en donde al llamar al metodo `__str__` de la clase _Pizza_, se ejecutará una _Query_ que retornará todos los objetos dentro de la table _Topping_ relacionados, para luego imprimirlos. 
+
+​	El problema viene dado a que cada vez que se ejecute una búsqueda sobre el modelo _Pizza_ y se realizará una llamada al modelo _Topping_ por cada objeto de la tabla _Pizza_ que necesitemos buscar, haciéndola una _Query_ bastante ineficiente.
+
+​	Para reducir las llamadas a únicamente 2, basta con utilizar el método `prefetch_relates` de la siguiente forma:
+
+````python
+Pizza.objects.all().prefetch_related('toppings')
+````
+
+​	Esto implica ejecutar un `self.toppings.all()` para cada _pizza_; sin embargo cada vez que se llama al `self.toppings.all()`, en lugar de tener que acceder a la base de datos para buscar los elementos, los encontrará en la memoria del _QuerySet_ cargado previamente en una única consulta. Por lo que todos los ingredientes relevantes se habrán obtenido en una sola consulta y se habrán utilizado para crear el _QuerySet_ almacenado en cache con los resultados relevantes para nuestro trabajo, el cual es quien será llamado por el `self.toppings.all()`en vez de a la base de datos. 
+
+> ​	Hay que tener en cuenta que el _QuerySet_ principal y todos los objetos relacionados especificados se cargarán en memoria. Cambiando el comportamiento típico de los _QuerySets_, los cuales intentan evitar ser cargados en memoria antes de que sean necesarios, por lo que, aunque pueda resultar en una mejora en el rendimiento, si no se utiliza con cuidado, podría significar un deterioro en la optimización del uso de memoria.
+>
+> ​	También es importante tener en cuanta que __<u>cualquier cambio en la consulta resultará en un_Query_totalmente distinta, que por lo tanto será almacenado en memoria en un espacio distinto.</u>__ Entonces, si escribimos lo siguiente:
+>
+> ````python
+> pizzas = Pizza.objects.prefetch_related('toppings')
+> [list(pizza.toppings.filter(spicy=True)) for pizza in pizzas]
+> ````
+>
+> ​	La primera consulta que fue guardada no nos será de utilidad, ya que la segunda búsqueda, al añadir un método diferente, se consideraría como una _Query_ distinta, y se ejecutaría y almacenaría en un espacio distinto, por lo que habremos ejecutado una consulta bastante compleja para nada y además de tenerla almacenada, realizamos y almacenamos una segunda, resultando en un mayor deterioro tanto del rendimiento como de la gestión de memoria. 
+>
+> ​	Además, si llama a los métodos de alteración de la base de datos `add()`, `remove()`, `clear()` o `set()`, en los administradores relacionados, se borrará cualquier caché precargada para la relación.
+
+​	Los siguientes casos son útiles y funcionales:
+
+```python
+Restaurant.objects.prefetch_related('pizzas__toppings')
+```
+
+​	Este precargará todas los objetos que coincidan con el filtro, es decir, todas las pizzas que pertenezcan a los restaurantes y todos los ingredientes que pertenecen a esas pizzas. Esto dará como resultado un total de 3 consultas de base de datos; una para los restaurantes, una para las pizzas y otra para los _toppings_. 
+
+```python
+Restaurant.objects.prefetch_related('best_pizza__toppings')
+```
+
+​	Esta búsqueda traerá las mejores pizzas y todos los ingredientes de cada una, para cada restaurante. Esto también hará 3 llamadas a la base de datos, una para los restaurantes, otra para las mejores pizzas y otra para los _toppings_.
+
+​	La _Query_ puede simplificarse utilizando el método `select_related` para reducir el recuento de consultas a solo 2:
+
+```python
+Restaurant.objects.select_related('best_pizza').prefetch_related('best_pizza__toppings')
+```
+
+​	Dado que la captación previa se ejecuta después de la consulta principal (que incluye las uniones necesarias para `select_related`), es capaz de detectar que los objetos `best_pizza` ya se han recuperado y omitirá recuperarlos de nuevo.
+
+​	El encadenamiento de llamadas `prefetch_related` acumulará las búsquedas que se precargaron. Para borrar cualquier comportamiento `prefetch_related`, ingresamos un `None` como parámetro:
+
+```python
+non_prefetched = qs.prefetch_related(None)
+```
+
+​	Una consideración al usar `.prefetch_related()` es que los objetos creados por la _Query_ se pueden compartir entre los diferentes objetos con los que están relacionados. Es decir, si varios objetos están relacionados a través de un `FK` a un mismo objeto, este no será replicado ni almacenado múltiples veces en memoria, sino que será compartido entre los objetos, de esta manera se ahorra memoria y tiempo de procesamiento.
+
+​	Para lograr un mayor control sobre el comportamiento del método `.prefetch_relates()`, podemos hacer uso de [`Prefetch()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.Prefetch), por ejemplo:
+
+```python
+>>> from django.db.models import Prefetch
+
+>>> Restaurant.objects.prefetch_related(Prefetch('pizzas__toppings'))
+```
+
+​	También se puede proporcionar un _QuerySet_ personalizado al hacer uso del argumento _queryset_ de la siguiente forma:
+
+```python
+>>> Restaurant.objects.prefetch_related(
+     Prefetch('pizzas__toppings', queryset=Toppings.objects.order_by('name'))
+)
+# Aqui estamos cambiando el orden predeterminado del QuerySet.
+```
+
+​	O también podemos llamar al método `.select_related()` para reducir aun más el número de consultas:
+
+```python
+>>> Pizza.objects.prefetch_related(
+     Prefetch('restaurants', queryset=Restaurant.objects.select_related('best_pizza'))
+)
+```
+
+​	En el caso de que necesitemos iterar sobre las instancias de un modelo, podemos precargar atributos relacionados en esas instancias utilizando la función `prefetch_related_objects()`.
+
+---
+
+
+
+#### [`prefetch_related_objects()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.prefetch_related_objects)
+
+​	Esta función sirve para buscar sobre una lista de instancias de un modelo, por ejemplo un _QuerySet_, que es un objeto compuesto por cierto numero de instancias de un modelo. Es especialmente útil para cuando recibamos una lista o tupla de instancias. 
+
+​	Al pasar un iterable de instancias, todas deben ser de la misma clase y las búsquedas o los objetos de captación previa, por ejemplo:
+
+```python
+from django.db.models import prefetch_related_objects
+
+restaurants = fetch_top_restaurants_from_cache()  # Una lista de restaurantes.
+prefetch_related_objects(restaurants, 'pizzas__toppings')
+```
+
+​	Cuando se utilizan múltiples bases de datos con `prefecth_related_objects`, la consulta utilizará el modelo asociado a las instancias ingresadas, esto se puede anular mediante el uso de un conjunto de consultas personalizadas en una búsqueda relacionada.
+
+---
+
+
+
+### No recuperes lo que no necesitas.
+
+#### `.values()`
+
+`QuerySet.values(*fields, **expresions)`
+
+​	Este método retorna un diccionario con los valores retornados por un _QuerySet_, es decir, en vez de retornar una instancia del modelo, siendo este además un objeto distinto en si mismo, se retorna un diccionario, en el caso de ser un objeto individual o una lista de diccionarios si son múltiples objetos, con los valores que alberga el objeto. 
+
+​	Es posible además especificar que campos queremos que sean retornados a través del uso del argumento _fields_, por ejemplo:
+
+```python
+>>> Blog.objects.values()
+<QuerySet [{'id': 1, 'name': 'Beatles Blog', 'tagline': 'All the latest Beatles news.'}]>
+>>> Blog.objects.values('id', 'name')
+<QuerySet [{'id': 1, 'name': 'Beatles Blog'}]>
+```
+
+​	También es posible implementar expresiones para filtrar o modificar los resultados de la función.
+
+```python
+>>> from django.db.models.functions import Lower
+
+>>> Blog.objects.values(lower_name=Lower('name'))
+<QuerySet [{'lower_name': 'beatles blog'}]>
+```
+
+​	Al escribir una función de agregación como argumento de la función `.values()`, esta se aplicará antes que otros argumentos dentro de la misma función `.values()`. Si necesitamos agrupar por otro valor, añadimos la agregación después que la función `.values()`. Por ejemplo:
+
+```python
+>>> from django.db.models import Count
+
+>>> Blog.objects.values('entry__authors', entries=Count('entry'))
+<QuerySet [{'entry__authors': 1, 'entries': 20}, {'entry__authors': 1, 'entries': 13}]>
+
+>>> Blog.objects.values('entry__authors').annotate(entries=Count('entry'))
+<QuerySet [{'entry__authors': 1, 'entries': 33}]>
+```
+
+
+
+---
+
+
+
+#### `.values_list()`
+
+
+
+---

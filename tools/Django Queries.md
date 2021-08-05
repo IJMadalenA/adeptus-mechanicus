@@ -166,9 +166,9 @@ Entry.objects.all().delete()
 
 ​	Un objeto `F()` es una herramienta que posibilita referirse a los valores dentro del campo de un modelo ahorrándonos el tener que realizar operaciones sobre la base de datos para extraer el valor del campo y almacenarlo en memoria como una variable para luego poder trabajar sobre él. En este caso un objeto `F()` es la representación del valor contenido en el campo que requerimos para trabajar.
 
+> ​	__Un objeto `F()` es la representación del valor contenido en uno de los campo que posee un objeto, el cual requerimos para trabajar. Este campo es sustituido por un objeto `F`, que en si misma es una expresión SQL que será ejecutada cuando se llame la función `.save()` del modelo, por lo que el campo de la variable que estamos manejando ya no contendrá mas un objeto `int`, `str`, o del tipo que sea, sino que contendrá una operación SQL.__ 
+
 ​	En su lugar, Django usa el objeto `F()` para generar una expresión __SQL__ que describa la operación que requerimos hacer en la base de datos.
-
-
 
 ​	Ejemplo de una operación normal sobre el campo de una base de datos:
 
@@ -178,7 +178,7 @@ reporter.stories_filed += 1
 reporter.save()
 ````
 
-​	En este caso almacenamos el objeto reportero que sobre el que deseamos trabajar dentro de una variable, y lo hemos modificado utilizando sencillos operadores de Python, y luego hemos guardado el objeto en la base de datos llamando al método `.save()`.   Sin embargo podemos utilizar le expresión `F()`de la siguiente forma:
+​	En este caso almacenamos el objeto _reporter_, sobre el que deseamos trabajar, dentro de una variable, y lo hemos modificado utilizando sencillos operadores de Python, y luego hemos guardado el objeto en la base de datos llamando al método `.save()`.   Sin embargo podemos utilizar le expresión `F()`de la siguiente forma:
 
 ```python
 from django.db.models import F
@@ -206,7 +206,7 @@ reporter.refresh_from_db()
 
 
 
-#### F() expression para realizar Updates.
+#### Usar `F()` en Updates.
 
 ​	La expresión `F()`se puede usar en QuerySets de instancias de objetos con `update()`. Esto reduce las dos queries que habitualmente usariamos, el `get()`y el `save()` a una sola, de esta manera:
 
