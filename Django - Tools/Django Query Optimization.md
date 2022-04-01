@@ -623,3 +623,40 @@ if display_emails:
 
 ​	En total este codito realiza o una o ninguna consulta a la base de datos, ya que el uso de los métodos `QuetySet.exists()` para el `if` o el uso del `QuerySet.count()` para el recuento de los emails, causaría consultas adicionales innecesarias.
 
+---
+
+
+
+### Creación y modificación múltiple con `.bulk_create()` y `.bulk_update()`
+
+#### [`.bulk_create()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.query.QuerySet.bulk_create)
+
+​	Crear múltiples objetos directamente en un solo acceso a la base de datos siempre será más eficiente que crear múltiples objetos a través de llamadas individuales.
+
+​	Este método inserta en el modelo la lista de objetos que ingresemos como parámetros de una manera mas eficiente (generalmente en una sola _Query_, no importa la cantidad de datos que ingresemos), y retorna una lista con los objetos creados, en el mismo orden en el que fueron ingresados al método.
+
+```python
+# Esto, en una sola llamada, siempre será mas eficiente:
+Entry.objects.bulk_create([
+    Entry(headline='This is a test'),
+    Entry(headline='This is only a test'),
+])
+
+# Que esto, en donde hago una llamada por objeto a crear.
+Entry.objects.create(headline='This is a test')
+Entry.objects.create(headline='This is only a test')
+```
+
+__Consideraciones a la hora de utilizar este método:__
+
+- Este método no llama al método `.save()` del modelo, por lo que las señales `pre_save` y `post_save` no son emitidas. 
+- No funciona con modelos secundarios, en un escenario de herencia de varias tablas.
+- Si la `PK` del modelo es un `AutoField`, el atributo de `PK` solo se puede recuperar en determinadas bases de datos.
+- No funciona con relaciones `many-to-many`.
+
+---
+
+
+
+#### [`.bulk_update()`](https://docs.djangoproject.com/es/3.2/ref/models/querysets/#django.db.models.query.QuerySet.bulk_update)
+

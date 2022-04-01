@@ -1,6 +1,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/venv,virtualenv,pycharm,python,git,jupyternotebooks,pydev,django
 # Edit at https://www.toptal.com/developers/gitignore?templates=venv,virtualenv,pycharm,python,git,jupyternotebooks,pydev,django
 
+# Images
+.ico
+*.ico
+
 ### Django ###
 *.log
 *.pot

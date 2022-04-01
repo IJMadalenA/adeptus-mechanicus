@@ -2,15 +2,44 @@
 
 ## Crear un nuevo repositorio.
 
-```git
+```shell
 $ git init [directory]
 ```
 
-​	Crea un repositorio de git vacio, basicamente un nuevo directorio .git con subdirectorios y plantillas de archivos. Si el directorio no se especifica, el git se creara en la ruta en donde se ejecutó.
-
-
+​	Crea un repositorio de git vacío, básicamente un nuevo directorio .git con subdirectorios y plantillas de archivos. Si el directorio no se especifica, el git se creara en la ruta en donde se ejecutó.
 
 ---
+
+​	Tambien podemos usar el comando `git remote add <url>` para emparejar nuestro repositorio local con la dirección del repositorio remoto de git.
+
+```shell
+git remote add origin  <REMOTE_URL> 
+```
+
+​	Esto asocia automáticamente el nombre `orign` con el `REMOTE_URL`.
+
+​	También podemos usar el comando `git remote set-url` para cambiar una URL remota.
+
+---
+
+````powershell
+PS C:\Users\ismae\OneDrive\Proyectos\Codigo\Fakestagram> git pull
+fatal: refusing to merge unrelated histories
+
+PS C:\Users\ismae\OneDrive\Proyectos\Codigo\Fakestagram> git push
+To https://github.com/IsMadalena/Fakestagram.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/IsMadalena/Fakestagram.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+PS C:\Users\ismae\OneDrive\Proyectos\Codigo\Fakestagram> git pull --rebase
+Successfully rebased and updated refs/heads/master.
+````
+
+
 
 ## Eliminar rama local.
 
@@ -40,6 +69,18 @@ $ git push origin :nombre-rama
 ```
 
 ​	Y de esta forma, desaparecerá la rama nombre-rama del servidor.
+
+---
+
+# Ramas.
+
+## Visualizar ramas.
+
+> ```
+> usuario@usuario-portatil:~/ejemplos-git$ git branch -v
+> ```
+
+
 
 
 
@@ -284,4 +325,4 @@ $ git reset --hard HEAD^2
  #(going back two commits before HEAD)
 ```
 
-​	Devuelve el archivo a su último commit y este sigue en seguimiento por git, es decir se podrá hacer `add`, `commit`, etc. luego de ejecutar el comando. 
+​	Devuelve el archivo a su último commit y este sigue en seguimiento por git, es decir se podrá hacer `add`, `commit`, etc. luego de ejecutar el comando.

@@ -390,6 +390,17 @@ $\gamma$
 
 ---
 
+## FOOTNOTE
+
+You can create footnotes like this[^1] and this[^fn]. 
+
+[^1]: Here is the **text** of the first ***\*first_footnote\****. 
+[^fn]: Here is the **text** of the second ***\*second_footnote\****.
+
+---
+
+
+
 ## EMOJIS
 
 ​	[Emoji's list](https://www.webfx.com/tools/emoji-cheat-sheet/)
@@ -491,3 +502,4 @@ For more details see [these instructions](https://mermaid-js.github.io/mermaid/#
     end
 ```
 
+​                                 
