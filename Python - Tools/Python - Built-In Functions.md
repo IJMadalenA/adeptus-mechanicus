@@ -1,57 +1,57 @@
 # PYTHON - Built-In Functions
 
-- [Python abs()](https://www.programiz.com/python-programming/methods/built-in/abs)
+[abs()](https://www.programiz.com/python-programming/methods/built-in/abs)
 
-- [Python any()](https://www.programiz.com/python-programming/methods/built-in/any)
+[any()](https://www.programiz.com/python-programming/methods/built-in/any)
 
-- [Python all()](https://www.programiz.com/python-programming/methods/built-in/all)
+[all()](https://www.programiz.com/python-programming/methods/built-in/all)
 
-- [Python ascii()](https://www.programiz.com/python-programming/methods/built-in/ascii)
+[ascii()](https://www.programiz.com/python-programming/methods/built-in/ascii)
 
-- [Python bin()](https://www.programiz.com/python-programming/methods/built-in/bin)
+[bin()](https://www.programiz.com/python-programming/methods/built-in/bin)
 
-- [Python bool()](https://www.programiz.com/python-programming/methods/built-in/bool)
+[bool()](https://www.programiz.com/python-programming/methods/built-in/bool)
 
-- [Python bytearray()](https://www.programiz.com/python-programming/methods/built-in/bytearray)
+[bytearray()](https://www.programiz.com/python-programming/methods/built-in/bytearray)
 
-- [Python callable()](https://www.programiz.com/python-programming/methods/built-in/callable)
+[callable()](https://www.programiz.com/python-programming/methods/built-in/callable)
 
-- [Python bytes()](https://www.programiz.com/python-programming/methods/built-in/bytes)
+[bytes()](https://www.programiz.com/python-programming/methods/built-in/bytes)
 
-- [Python chr()](https://www.programiz.com/python-programming/methods/built-in/chr)
+[chr()](https://www.programiz.com/python-programming/methods/built-in/chr)
 
-- [Python compile()](https://www.programiz.com/python-programming/methods/built-in/compile)
+[compile()](https://www.programiz.com/python-programming/methods/built-in/compile)
 
-- [Python classmethod()](https://www.programiz.com/python-programming/methods/built-in/classmethod)
+[classmethod()](https://www.programiz.com/python-programming/methods/built-in/classmethod)
 
-- [Python complex()](https://www.programiz.com/python-programming/methods/built-in/complex)
+[complex()](https://www.programiz.com/python-programming/methods/built-in/complex)
 
-- [Python delattr()](https://www.programiz.com/python-programming/methods/built-in/delattr)
+[delattr()](https://www.programiz.com/python-programming/methods/built-in/delattr)
 
-- [Python dict()](https://www.programiz.com/python-programming/methods/built-in/dict)
+[dict()](https://www.programiz.com/python-programming/methods/built-in/dict)
 
-- [Python dir()](https://www.programiz.com/python-programming/methods/built-in/dir)
+[dir()](https://www.programiz.com/python-programming/methods/built-in/dir)
 
-- [Python divmod()](https://www.programiz.com/python-programming/methods/built-in/divmod)
+[divmod()](https://www.programiz.com/python-programming/methods/built-in/divmod)
 
-- [Python enumerate()](https://www.programiz.com/python-programming/methods/built-in/enumerate)
+[enumerate()](https://www.programiz.com/python-programming/methods/built-in/enumerate)
 
-- [Python staticmethod()](https://www.programiz.com/python-programming/methods/built-in/staticmethod)
+[staticmethod()](https://www.programiz.com/python-programming/methods/built-in/staticmethod)
 
-- [Python filter()](https://www.programiz.com/python-programming/methods/built-in/filter)
+[filter()](https://www.programiz.com/python-programming/methods/built-in/filter)
 
-- [Python eval()](https://www.programiz.com/python-programming/methods/built-in/eval)
+[eval()](https://www.programiz.com/python-programming/methods/built-in/eval)
 
-- [Python float()](https://www.programiz.com/python-programming/methods/built-in/float)
+[float()](https://www.programiz.com/python-programming/methods/built-in/float)
 
-- [Python format()](https://www.programiz.com/python-programming/methods/built-in/format)
+[format()](https://www.programiz.com/python-programming/methods/built-in/format)
 
-- [Python frozenset()](https://www.programiz.com/python-programming/methods/built-in/frozenset)
+[frozenset()](https://www.programiz.com/python-programming/methods/built-in/frozenset)
 
-  ---
+---
 
-  
-## - [Python getattr()](https://www.programiz.com/python-programming/methods/built-in/getattr)
+
+## [getattr()](https://www.programiz.com/python-programming/methods/built-in/getattr)
 
 ​	The getattr() method returns the value of the named attribute of an object. If not found, it returns the default value provided to the function.
 
@@ -81,91 +81,106 @@ object.name
 
   
 
-- [Python globals()](https://www.programiz.com/python-programming/methods/built-in/globals)
+[globals()](https://www.programiz.com/python-programming/methods/built-in/globals)
 
-- [Python exec()](https://www.programiz.com/python-programming/methods/built-in/exec)
+[exec()](https://www.programiz.com/python-programming/methods/built-in/exec)
 
-- [Python hasattr()](https://www.programiz.com/python-programming/methods/built-in/hasattr)
+[hasattr()](https://www.programiz.com/python-programming/methods/built-in/hasattr)
 
-- [Python help()](https://www.programiz.com/python-programming/methods/built-in/help)
+[help()](https://www.programiz.com/python-programming/methods/built-in/help)
 
-- [Python hex()](https://www.programiz.com/python-programming/methods/built-in/hex)
+[hex()](https://www.programiz.com/python-programming/methods/built-in/hex)
 
-- [Python hash()](https://www.programiz.com/python-programming/methods/built-in/hash)
+[hash()](https://www.programiz.com/python-programming/methods/built-in/hash)
 
-- [Python input()](https://www.programiz.com/python-programming/methods/built-in/input)
+[input()](https://www.programiz.com/python-programming/methods/built-in/input)
 
-- [Python id()](https://www.programiz.com/python-programming/methods/built-in/id)
+[id()](https://www.programiz.com/python-programming/methods/built-in/id)
 
-- [Python isinstance()](https://www.programiz.com/python-programming/methods/built-in/isinstance)
+[isinstance()](https://www.programiz.com/python-programming/methods/built-in/isinstance)
 
-- [Python int()](https://www.programiz.com/python-programming/methods/built-in/int)
+[int()](https://www.programiz.com/python-programming/methods/built-in/int)
 
-- [Python issubclass()](https://www.programiz.com/python-programming/methods/built-in/issubclass)
+[issubclass()](https://www.programiz.com/python-programming/methods/built-in/issubclass)
 
-- [Python iter()](https://www.programiz.com/python-programming/methods/built-in/iter)
+[iter()](https://www.programiz.com/python-programming/methods/built-in/iter)
 
-- [Python list() Function](https://www.programiz.com/python-programming/methods/built-in/list)
+[list() Function](https://www.programiz.com/python-programming/methods/built-in/list)
 
-- [Python locals()](https://www.programiz.com/python-programming/methods/built-in/locals)
+[locals()](https://www.programiz.com/python-programming/methods/built-in/locals)
 
-- [Python len()](https://www.programiz.com/python-programming/methods/built-in/len)
+[len()](https://www.programiz.com/python-programming/methods/built-in/len)
 
-- [Python max()](https://www.programiz.com/python-programming/methods/built-in/max)
+When you use built-in data types and many third-party types with `len()`, the function doesn’t need to iterate through the data structure. The length of a container object is stored as an attribute of the object. The value of this attribute is modified each time items are added to or removed from the data structure, and `len()` returns the value of the length attribute. This ensures that `len()` works efficiently.
 
-- [Python min()](https://www.programiz.com/python-programming/methods/built-in/min)
+[max()](https://www.programiz.com/python-programming/methods/built-in/max)
 
-- [Python map()](https://www.programiz.com/python-programming/methods/built-in/map)
+[min()](https://www.programiz.com/python-programming/methods/built-in/min)
 
-- [Python next()](https://www.programiz.com/python-programming/methods/built-in/next)
+[map()](https://www.programiz.com/python-programming/methods/built-in/map)
 
-- [Python memoryview()](https://www.programiz.com/python-programming/methods/built-in/memoryview)
+[next()](https://www.programiz.com/python-programming/methods/built-in/next)
 
-- [Python object()](https://www.programiz.com/python-programming/methods/built-in/object)
+[memoryview()](https://www.programiz.com/python-programming/methods/built-in/memoryview)
 
-- [Python oct()](https://www.programiz.com/python-programming/methods/built-in/oct)
+[object()](https://www.programiz.com/python-programming/methods/built-in/object)
 
-- [Python ord()](https://www.programiz.com/python-programming/methods/built-in/ord)
+[oct()](https://www.programiz.com/python-programming/methods/built-in/oct)
 
-- [Python open()](https://www.programiz.com/python-programming/methods/built-in/open)
+[ord()](https://www.programiz.com/python-programming/methods/built-in/ord)
 
-- [Python pow()](https://www.programiz.com/python-programming/methods/built-in/pow)
+[open()](https://www.programiz.com/python-programming/methods/built-in/open)
 
-- [Python print()](https://www.programiz.com/python-programming/methods/built-in/print)
+[pow()](https://www.programiz.com/python-programming/methods/built-in/pow)
 
-- [Python property()](https://www.programiz.com/python-programming/methods/built-in/property)
+[print()](https://www.programiz.com/python-programming/methods/built-in/print)
 
-- [Python range()](https://www.programiz.com/python-programming/methods/built-in/range)
+[property()](https://www.programiz.com/python-programming/methods/built-in/property)
 
-- [Python repr()](https://www.programiz.com/python-programming/methods/built-in/repr)
+## [range()](https://www.programiz.com/python-programming/methods/built-in/range)
 
-- [Python reversed()](https://www.programiz.com/python-programming/methods/built-in/reversed)
+Se puede generar secuencias inversas, empezando por un número mayor y terminando en uno menor, pero el salto deberá ser negativo, por ejemplo:
 
-- [Python round()](https://www.programiz.com/python-programming/methods/built-in/round)
+```python
+for i in range(5, 0, -1):
+    print(i)
+    
+>>> 5
+>>> 4
+>>> 3
+>>> 2
+>>> 1
+```
 
-- [Python set()](https://www.programiz.com/python-programming/methods/built-in/set)
+[repr()](https://www.programiz.com/python-programming/methods/built-in/repr)
 
-- [Python setattr()](https://www.programiz.com/python-programming/methods/built-in/setattr)
+[reversed()](https://www.programiz.com/python-programming/methods/built-in/reversed)
 
-- [Python slice()](https://www.programiz.com/python-programming/methods/built-in/slice)
+[round()](https://www.programiz.com/python-programming/methods/built-in/round)
 
-- [Python sorted()](https://www.programiz.com/python-programming/methods/built-in/sorted)
+[set()](https://www.programiz.com/python-programming/methods/built-in/set)
 
-- [Python str()](https://www.programiz.com/python-programming/methods/built-in/str)
+[setattr()](https://www.programiz.com/python-programming/methods/built-in/setattr)
 
-- [Python sum()](https://www.programiz.com/python-programming/methods/built-in/sum)
+[slice()](https://www.programiz.com/python-programming/methods/built-in/slice)
 
-- [Python tuple() Function](https://www.programiz.com/python-programming/methods/built-in/tuple)
+[sorted()](https://www.programiz.com/python-programming/methods/built-in/sorted)
 
-- [Python type()](https://www.programiz.com/python-programming/methods/built-in/type)
+[str()](https://www.programiz.com/python-programming/methods/built-in/str)
 
-- [Python vars()](https://www.programiz.com/python-programming/methods/built-in/vars)
+[sum()](https://www.programiz.com/python-programming/methods/built-in/sum)
 
-- [Python zip()](https://www.programiz.com/python-programming/methods/built-in/zip)
+[tuple() Function](https://www.programiz.com/python-programming/methods/built-in/tuple)
 
-- [Python __import__()](https://www.programiz.com/python-programming/methods/built-in/__import__)
+[type()](https://www.programiz.com/python-programming/methods/built-in/type)
 
-- [Python super()](https://www.programiz.com/python-programming/methods/built-in/super)
+[vars()](https://www.programiz.com/python-programming/methods/built-in/vars)
+
+[zip()](https://www.programiz.com/python-programming/methods/built-in/zip)
+
+[__import__()](https://www.programiz.com/python-programming/methods/built-in/__import__)
+
+[super()](https://www.programiz.com/python-programming/methods/built-in/super)
 
 
 
@@ -347,5 +362,6 @@ A High Order Function (H.O.F.), is a function that receives another function as 
 with open(".route/of/file.txt", "<opening_mode>", encoding = '<encoding_type') as <optional_name>:
 ```
 =======
+
 >>>>>>> master
 
