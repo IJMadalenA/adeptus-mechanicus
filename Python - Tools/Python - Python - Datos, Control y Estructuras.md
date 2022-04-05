@@ -145,7 +145,21 @@ KeyError: 'missing'
 
 
 
-## Paralelización emulando función Switch.
+## Paralelización emulando Switch.
+
+Una de las principales diferencias entre usar una cadena de condicionales `if-elif` es que todos los bloques tienen el mismo tiempo de acceso y ejecución. En una cadena de condicionales normal de Python todas las condiciones van siendo evaluadas hasta que se cumple y se sale del proceso, en cambio al emular un `switch` todo se ejecuta al unisono. 
+
+Esto es especialmente útil si se trabaja con un gran numero de condiciones. Una forma de tener una especie de `switch` es haciendo uso de un diccionario. Por lo tanto podríamos convertir el siguiente código:
+
+```python
+def opera2(operador, a, b):
+    return {
+        'suma': lambda: a + b,
+        'resta': lambda: a - b,
+        'multiplica': lambda: a * b,
+        'divide': lambda: a / b
+    }.get(operador, lambda: None)
+```
 
 
 
