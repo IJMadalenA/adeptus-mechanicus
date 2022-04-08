@@ -17,7 +17,13 @@ Cuando dos ramas de desarrollo se unen, es posible que sea necesario unir las mi
 los detalles a tener en cuenta a la hora de crear y aplicar migraciones son los siguiente: 
 
 * Durante el trabajo será necesario crear múltiples migraciones para que Django puede ejecutarse correctamente, sin embargo hay que tener cuidado de no agregar estas nuevas migraciones a los _commits_ que creemos, ya que deberemos eliminarlas luego.
-* Antes de hacer hacer _merge_ con la rama _develop_ (la cual procuraremos que siempre esté actualizada) podemos revertir todas las migraciones aplicadas hasta la ultima coincidente con la rama _develop_ para tener total seguridad de no generar ningún conflicto. 
+
+* Antes de hacer hacer _merge_ con la rama _develop_ (la cual procuraremos que siempre esté actualizada) podemos revertir todas las migraciones aplicadas hasta la ultima coincidente con la rama _develop_ utilizando el comando:
+
+   `python manage.py migrate <app> <migration_code>` 
+
+  para tener total seguridad de no generar ningún conflicto al volver a tener nuestra base de datos idéntica a la de la rama _develop_. 
+
 * Al hacer _merge_, si la rama _develop_ tiene un nuevo archivo de migración, lo primero que debemos hacer será aplicar dicha migración, para luego crear un nuevo archivo de migración con nuestros nuevos cambios y volver a aplicar las migraciones, es decir, al hacer el merge y resolver los conflictos, utilizamos `python manage.py migrate`, aplicamos los nuevos cambios y ahora utilizamos `python manage.py makemigrations` para registrar nuestros nuevos cambios y posteriormente aplicarlos de nuevo con `python manage.py migrate`.
 
 De este modo nos aseguramos de no romper la secuencia en el registro de migraciones y de evitar generar conflictos respecto a los cambios que puedan hacer otros miembros del equipo.
