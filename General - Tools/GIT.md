@@ -1,4 +1,4 @@
-# git
+# git.
 
 ## Crear un nuevo repositorio.
 
@@ -72,9 +72,9 @@ $ git push origin :nombre-rama
 
 ---
 
-# Ramas.
+## branch.
 
-## Visualizar ramas.
+### 	Visualizar ramas.
 
 > ```
 > usuario@usuario-portatil:~/ejemplos-git$ git branch -v
@@ -86,9 +86,9 @@ $ git push origin :nombre-rama
 
 ---
 
-# Merge
+## merge
 
-## Tipos de merge.
+### 	Tipos de merge.
 
 ​	Existen al menos tres posibles resultados cuando hacemos un merge:
 
@@ -98,13 +98,20 @@ $ git push origin :nombre-rama
 
 - **Merge con conflictos**: cuando se presenta un merge con conflictos por resolver, siempre **se crea un nuevo commit** que representa la solución de los conflictos.
 
+### Cancelar merge.
+
+```git
+```
+
+
+
 ---
 
-# add
+## add.
 
 ​    Cuando ejecutamos el comando `git add` seguido del archivo o los archivos editados, estos son guardados en  el area de `staging`, que es un area en memoria RAM que almacena todos los cambios añadidos que aun no son enviador al repositorio por el comando `git commit`.
 
-## Eliminar un archivo en staging.
+### 	Eliminar un archivo en staging.
 
 ```git
 $ git rm --cached archivo.tipo
@@ -114,17 +121,27 @@ $ git rm --cached archivo.tipo
 
 ​    Este comando permite eliminar archivos de git sin eliminar su historial del sistema de versiones, es decir que, solo eliminamos su representación en el staging, no lo hacemos enteramente del proyecto o del historial de git.
 
+
+
 ```git
 $ git rm --force archivo.tipo
 ```
 
-​    Elimina el o los archivos del area de staging de git y tambien del disco duro. Aunque podríamos recuperarlo regresando a versiones anteriores.    
+​    Elimina el o los archivos del area de staging de git y tambien del disco duro. Aunque podríamos recuperarlo regresando a versiones anteriores.  
+
+
+
+```git
+$ git rm --cached 
+```
+
+  Elimina los archivos modificados del area de staging, o indice.
 
 ---
 
-# Commits.
+## commit.
 
-## Historial de commits.
+### 	Historial de commits.
 
 ```git
 $ git log [<options>]
@@ -186,7 +203,7 @@ Esta opción muestra el parche que representa cada confirmación. Se muestra la 
 
 ---
 
-## Localizar un commit.
+### 	Localizar un commit.
 
 - En función del comentario del commit:
 
@@ -250,7 +267,7 @@ $ git log --oneline -- file.type
 
 ---
 
-## Cambios en el ultimo commit.
+### 	Cambios en el ultimo commit.
 
 ```git
 git show nombre_del_archivo.tipo
@@ -262,7 +279,7 @@ git show nombre_del_archivo.tipo
 
 ---
 
-## Comparar commits.
+### 	Comparar commits.
 
 ```git
 $ git diff id_1 id_2
@@ -276,7 +293,7 @@ $ git diff id_1 id_2
 
 ---
 
-## Eliminar commits.
+### 	Eliminar commits.
 
 ```git 
 $ git rm --cached
@@ -290,7 +307,7 @@ $ git rm --cached
 
 
 
-## Regresar a un commit anterior.
+### 	Regresar a un commit anterior.
 
 ```git
 $ git reset <commit_id> 
