@@ -15,3 +15,20 @@ Las señales de Django son una forma de informar a las aplicaciones de ciertas t
 
 
 
+## Cuando usar o no las señales.
+
+### Cuando están bien las señales:
+
+- El receptor de la señal necesita realizar cambios en más de un modelo.
+- Desea enviar la misma señal desde varias aplicaciones y hacer que se manejen de la misma manera por un receptor común.
+- Desea invalidar un caché después de guardar un modelo.
+- Tiene un escenario inusual que necesita una devolución de llamada, y no hay otra manera de manejarlo además de usar una señal. Por ejemplo, desea activar algo en función del `save()` o `init()` del modelo de una aplicación de terceros la cual no se puede modificar y su extensión podría ser imposible, por lo que una señal proporciona un desencadenante para una devolución de llamada.
+
+### Cuando no están bien las señales:
+
+- La señal se relaciona con un modelo en particular y se puede mover a uno de los métodos de ese modelo, posiblemente llamado por el `save()`.
+- La señal se puede reemplazar con un método de administrador de modelos personalizados.
+- La señal se relaciona con una vista particular y se puede mover a esa vista.
+
+
+
