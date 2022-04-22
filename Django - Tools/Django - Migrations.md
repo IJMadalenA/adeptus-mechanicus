@@ -68,5 +68,52 @@ working_branch ->> dev_branch: push y merge request.
 
 Si bien las migraciones son por aplicación, las tablas y relaciones implícitas en los modelos son demasiado complejas como para crear una app a la vez, ya que si tenemos un modelo son una _ForeignKey_, se debe verificar la tabla referenciada primero, ya que si Django identifica que la tabla referenciada no existe retornará un error.
 
-## Consistencia del Historial.
+## Añadir migraciones a una aplicación especifica.
 
+```shell
+$ python manage.py makemigrations <app_name>
+```
+
+## Revertir migraciones.
+
+```shell
+$ python manage.py migrate <app_name> <migration_number>
+```
+
+Si tu intención es revertir todas las migraciones aplicadas para una aplicación, utiliza el comando `zero`. 
+
+```shell
+$ python manage.py migrate <app_name> zero
+```
+
+Si una migración contiene alguna operación irreversible, esta, al intentar revertirse, arrojará un `IrreversibleError`.
+
+## [Reducir migraciones.](https://docs.djangoproject.com/en/4.0/topics/migrations/#squashing-migrations)
+
+Django está optimizado para poder lidiar con cientos de migraciones sin que esto afecte al rendimiento, sin embargo, en el caso de que tengamos más migraciones de las que deseamos, es posible reducirlas al simplificar las operaciones incluidas en ellas y eliminando las que resulten redundantes o contradictorias. 
+
+```shell
+$ python manage.py squashmigrations <app_name> <app_number>
+```
+
+Este código reducirá todas las migraciones previas al numero que definamos, optimizando las operaciones y reduciendo su complejidad.
+
+Una vez ejecutado el `squachmigrations` será necesario realizar la transición entre las migraciones antiguas hacia la nueva optimizada.
+
+- Eliminar todas las migraciones que el nuevo archivo remplaza.
+- Actualizar todas las migraciones que dependan de las migraciones eliminadas para que en su lugar dependan de la migración comprimida.
+- Remover el atributo `replaces` en la clase `Migration` de la migración comprimida. Esta es la manera en la que Django comunica que es una migración comprimida.
+
+> Una vez hayas comprimida una migración, no deber re-comprimirla hasta que hayas llevado a cabo toda la transición hacia una migración normal.
+
+## [Serialización de valores.](https://docs.djangoproject.com/en/4.0/topics/migrations/#serializing-values)
+
+Las migraciones en si mismas son una especie de registro que guarda la serialización de cada objeto dentro de un modelo, y puede serializar una gran cantidad de tipos de datos, sin embargo me limitará a señalar aquellos que NO puede serializar:
+
+- Clases anidadas.
+- Instancias arbitrarias de clases. 
+- Lambdas o funciones anónimas.
+
+> Si quieres saber todos los datos que las migraciones son capaces de serializar puedes recurrir a la documentación de Django.
+>
+> También es posible crear [serializadores personalizados](https://docs.djangoproject.com/en/4.0/topics/migrations/#custom-serializers).
