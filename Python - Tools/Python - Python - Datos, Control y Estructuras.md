@@ -57,6 +57,59 @@ for i in text[::-1]:
 >>> P
 ```
 
+### `break`
+
+Sentencia que permite alterar el comportamiento de los bucles `while` y `for`, permitiendo terminar con la ejecución del bucle una vez se encuentra la palabra `break`.
+
+#### `break` con bucle `for`.
+
+Se itera sobre el objeto hasta el momento en que se cumple la condición, se encuentra con la sentencia `break` y se sale del bucle.
+
+```python
+cadena = 'Python'
+for letra in cadena:
+    if letra == 'h':
+        print("Se encontró la h")
+        break
+    print(letra)
+
+# Salida:
+# P
+# y
+# t
+# Se encontró la h
+```
+
+Es útil en la manera en la que permite optimizar recursos.
+
+#### `break` con bucle `while`.
+
+La condición `while True` haría que la sección de código se ejecute indefinidamente (cuidado con esto), pero al hacer uso del `break`, el bucle se detendrá cuando `x` valga `0`.
+
+```python
+x = 5
+while True:
+    x -= 1
+    print(x)
+    if x == 0:
+        break
+    print("Fin del bucle")
+
+#4, 3, 2, 1, 0
+```
+
+Por norma general, y salvo en casos muy concretos, todo bucle `while True` tiene una sentencia `break` dentro.
+
+#### `break` en bucles anidados.
+
+
+
+
+
+---
+
+
+
 ## dict's.
 
 Es un tipo estructura no ordenada de datos que permite almacenar un numero arbitrario de objetos, cada uno de estos identificado con un __key__ unico. Esto nos permite poder buscar, insertar o eliminar cualquier objeto asociado a una __key__ determinada.
@@ -65,7 +118,7 @@ Los diccionarios están indexados por claves que pueden ser de cualquier tipo de
 
 Ademas del objeto ___dict___ simple, implementado en Python, existen diferentes implementaciones mas especializadas basadas en la clase ___dict___ basica integrada.
 
-### collections.OrderedDict 
+### `collections.OrderedDict`.
 
 __Recuerda el orden de inserción de los indices.__
 
@@ -95,7 +148,7 @@ __.move_to_end(key, last = true)__
 
 
 
-### collections.defaultdict.
+### `collections.defaultdict.`
 
 La diferencia con un ___dict___ normal es que el ___defaultdict___ jamas retorna un ___KeyError___ ya que provee un valor por defecto si el indice no existe.
 
@@ -116,7 +169,7 @@ https://www.geeksforgeeks.org/defaultdict-in-python/
 ['Rufus', 'Kathrin', 'Mr Sniffles']
 ```
 
-### collections.CainMap.
+### `collections.ChainMap.`
 
 > Permite buscar en múltiples diccionarios como si fuesen uno solo.
 
@@ -163,6 +216,9 @@ def opera2(operador, a, b):
 
 
 
-## Fuentes
+## Fuentes.
 
 https://realpython.com/python-data-structures/
+
+https://ellibrodepython.com/estructuras-control-python
+

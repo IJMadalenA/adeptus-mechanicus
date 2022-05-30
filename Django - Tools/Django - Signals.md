@@ -32,3 +32,6 @@ Las señales de Django son una forma de informar a las aplicaciones de ciertas t
 
 
 
+## Testear señales.
+
+[Ejemplo](https://hakibenita.com/how-to-test-django-signals-like-a-pro#:~:text=Implement%20a%20context%20manager%20for%20testing%20Django%20signals,apps%20to%20handle%20without%20creating%20a%20direct%20dependency.?msclkid=1f9b69c0cd2e11ec9cc3ede67ce8acd8)
