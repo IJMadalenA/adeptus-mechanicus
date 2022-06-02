@@ -102,11 +102,165 @@ Por norma general, y salvo en casos muy concretos, todo bucle `while True` tiene
 
 #### `break` en bucles anidados.
 
+El uso de la sentencia `break` rompe con la secuencia del bucle, pero solo en el que está dentro, es decir, si tenemos dos bucles anidados el `break` romperá el bucle anidado, el interno, pero no el bucle exterior.
+
+```python
+for i in range(0, 4):
+    for j in range(0, 4):
+        # No se realizará más de una iteración.
+        break
+        
+    #El `break` no afectara el comportamiento de este bucle.
+       
+    print(i, j)
+    
+# 0 0
+# 1 0
+# 2 0
+# 3 0
+```
 
 
 
+### `continue`
+
+Permite modificar el comportamiento de los bucles `while` y `for` al saltar todo el código restante en la iteración actual y vuelve al principio en el caso de que aún queden iteraciones por completar.
+
+La diferencia entre `break` y `continue` es que el segundo no rompe el bucle, sino que pasa a la siguiente iteración ignorando todo el código pendiente.
+
+```python
+string = 'Python'
+for i in string:
+    if i == 'P':
+        continue
+    print(i)
+
+# y
+# t
+# h
+# o
+# n
+```
+
+A diferencia del `break`, el `continue` no rompe el bucle sino que finaliza la iteración actual, haciendo que todo el código que va después se salte, y se vuelva al principio a evaluar la condición en la siguiente iteración.
 
 ---
+
+### [`zip()`](https://docs.python.org/3/library/functions.html#zip)
+
+> La función `zip(*iterables, strict=False)` viene incluida por defecto en el _namespace_, lo que significa que puede ser usada sin tener que importarse.
+
+Esta función itera sobre una cantidad $n$ de iterables en paralelo, retornando una tupla formada por el objeto que en ese momento este siendo iterado de cada iterable ingresado, en el orden en el que estos son ingresados como argumentos en la función, por lo que la longitud de la tupla será igual a la cantidad de iterables ingresados.
+
+> Técnicamente la función `zip()` retorna un `zip object`, el cual puede ser transformado en una lista a través del método `list()`.
+
+También podemos pensar a la función `zip()` en u transformador de columnas a filas, o de filas a columnas, similar a una [transposición de matriz](https://en.wikipedia.org/wiki/Transpose).
+
+> `zip()` es una función _lazy_, es decir que el elemento no será procesado hasta que se itere sobre el iterable, como podría ser un bucle `for` o al ser ingresado en un objeto [`list`](https://docs.python.org/3/library/stdtypes.html#list).
+
+#### Manejo de parametros.
+
+Al ser posible ingresarle iterables de diferentes longitudes como argumentos a la función `zip()`, esta nos ofrece tres maneras de manejar esta situación:
+
+- Por defecto `zip()` se detiene al momento de agotar al iterable de menor longitud, ignorando al resto de objetos restantes en los iterables mas largos, definiendo el numero total de iteraciones en función del iterable mas corto.
+- En el caso de que sea necesario o se tenga la certeza de que los iterables ingresados poseen la misma longitud, se puede definir al parámetro `strict` como `True`, lo que hará que la función `zip()` verifique si las longitudes son iguales y en el caso de no ser así devuelva un `ValueError`.
+  En el caso de `strict=False`, comportamiento por defecto de la función, cualquier error o diferencia de longitud será ignorada y silenciada, pudiendo generar un bug difícil de encontrar.
+- Se pueden rellenar los valores faltantes de los iterables más cortos con valores predeterminados para que de esta manera todos tengan la misma longitud, utilizando la función [`itertools.zip_longest()`](https://docs.python.org/3/library/itertools.html#itertools.zip_longest).
+
+> `zip()` se puede usar en conjunto con el operador `*` para descomprimir el iterable retornado por la función, y además es una buena manera de revertir los cambios realizados por su implementación, por ejemplo:
+>
+> ```python
+> >>> x = [1, 2, 3]
+> >>> y = [4, 5, 6]
+> >>> z = zip(x, y)
+> >>> print(list(z))
+> [(1, 4), (2, 5), (3, 6)]
+> 
+> >>> x2, y2 = zip(*z)
+> >>> x == list(x2) and y == list(y2)
+> True
+> 
+> >>>print(x2)
+> [1, 2, 3]
+> 
+> >>>print(y2)
+> [4, 5, 6]
+> ```
+
+#### Iterar sobre `dict`.
+
+La función `zip()` esta hecha para trabajar sobre cualquier clase de iterable, incluyendo objetos `dict`.
+
+Por defecto al ingresar un diccionario como argumento se toman las _key_ del objeto `dict`.
+
+```python
+esp = {'1': 'Uno', '2': 'Dos', '3': 'Tres'}
+eng = {'1': 'One', '2': 'Two', '3': 'Three'}
+
+for a, b in zip(esp, eng):
+    print(a, b)
+
+# 1 1
+# 2 2
+# 3 3
+```
+
+Sin embargo, si utilizamos la función `.items()` podemos acceder al _key_ y _value_ de cada objeto.
+
+```python
+esp = {'1': 'Uno', '2': 'Dos', '3': 'Tres'}
+eng = {'1': 'One', '2': 'Two', '3': 'Three'}
+
+for (k1, v1), (k2, v2) in zip(esp.items(), eng.items()):
+    print(k1, v1, v2)
+
+# 1 Uno One
+# 2 Dos Two
+# 3 Tres Three
+```
+
+#### Deshacer `zip()`.
+
+Supongamos que hemos utilizado la función `zip()` para obtener $c$.
+
+```python
+a = [1, 2, 3]
+b = ["One", "Two", "Three"]
+c = zip(a, b)
+
+print(list(c))
+# [(1, 'One'), (2, 'Two'), (3, 'Three')]
+```
+
+### `enumerate()`
+
+`enumerate(iterable, start=0)`
+
+Retorna un objeto `enumerate`, el cual es un objeto iterable, que al transformarse a través del método `list()` contiene una lista de tuplas cuyo valor inicial es el indice o cantador, comenzando en 0, del objeto iterado en ese momento, seguido por el valor obtenido de dicho iterable.
+
+```python
+seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+list(enumerate(seasons))
+[(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+list(enumerate(seasons, start=1))
+[(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+```
+
+## List comprehensions.
+
+Es una manera de crear, en una sola linea de código, listas de elementos en función de un objeto iterable. 
+
+```python
+newlist = [expression fot item in iterable]
+```
+
+El _list comprehension_ se rellenará con el resultado de la expresión aplicada sobre el objeto iterado, contenido, obviamente, en el iterable. 
+
+También es posible utilizar sentencias condicionales para modificar el comportamiento del _list comprehension_ y así solo añadir los elementos con las características que deseamos.  
+
+```python
+newlist = [expression for item in iterable if condition == True]
+```
 
 
 
@@ -116,7 +270,7 @@ Es un tipo estructura no ordenada de datos que permite almacenar un numero arbit
 
 Los diccionarios están indexados por claves que pueden ser de cualquier tipo de objeto [hashable](https://docs.python.org/3/glossary.html#term-hashable). Un objeto hashable es uno que tiene un valor _hash_ que nunca cambia durante su tiempo de vida, esta caracteristica les permite a este tipo de objeto ser usados tanto como __key__ en un diccionario como tambien formar parte de un objeto tuple, objetos que les exigen ser llaves unicas.
 
-Ademas del objeto ___dict___ simple, implementado en Python, existen diferentes implementaciones mas especializadas basadas en la clase ___dict___ basica integrada.
+Ademas del objeto ___dict___ simple, implementado en Python, existen diferentes implementaciones mas especializadas basadas en la clase ___dict___ básica integrada.
 
 ### `collections.OrderedDict`.
 
