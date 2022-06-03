@@ -23,7 +23,7 @@
 
 ### *ITALIC TEXT*
 
-​	Enclose  the text between  `*`  or `_` to make it *italic* 
+Enclose  the text between  `*`  or `_` to make it *italic* 
 
 ```markdown
   *This text will be italic*
@@ -38,7 +38,7 @@ _This will also be italic_
 
 ### BOLD TEXT
 
-​	Enclose the text between two asterisks to make it **bold**
+Enclose the text between two asterisks to make it **bold**
 
 ```markdown
   **This text will be bold**
@@ -52,14 +52,24 @@ __This will also be bold__
 
 ### STRIKETHROUGH
 
-​	Any word wrapped with two tildes (like `~~this~~`) will appear crossed out.
+Any word wrapped with two tildes (like `~~this~~`) will appear crossed out.
 
 ```
   ~~this text will be crossed out~~ 
 ```
 ~~this text will be crossed out~~
 
+### UNDERLINED
 
+MarkDown dont have a build-in option to do underlined, thats to avoid confusions with the links.
+
+Instead we can use the HTML `<u> ... </u>` .
+
+````HTML
+<u> This text is underlined.</u>
+````
+
+<u>This text is underlined.</u>
 
 ---
 
@@ -67,15 +77,15 @@ __This will also be bold__
 
 ## LINKS
 
-​	Links are hyper links, on click it, move to other section /url of web resources.
+Links are hyper links, on click it, move to other section /url of web resources.
 
-​	There are many types of links can be created in Markdown.
+There are many types of links can be created in Markdown.
 
 
 
 ### URL LINKS
 
-​	Inline links contains text which displayed to user enclosed in square brackets `[]` and link URL enclosed in parens `()` Links Url is absolute URL like domain name.
+Inline links contains text which displayed to user enclosed in square brackets `[]` and link URL enclosed in parens `()` Links Url is absolute URL like domain name.
 
 ```markdown
   [Text displayed](https://www.w3schools.io/file/markdown-introduction/)
@@ -278,7 +288,18 @@ for i in range(10):
 ```markdown
   ![Image The Ring One](https://bit.ly/2QVStqo)
 ```
-​	  ![Image The Ring One](https://bit.ly/2QVStqo)
+  ![Image The Ring One|500](https://bit.ly/2QVStqo)
+
+---
+
+```html
+<img src="https://bit.ly/2QVStqo" alt="Image The Ring One|" style="zoom:50%;" />
+
+```
+
+
+
+​	  <img src="https://bit.ly/2QVStqo" alt="Image The Ring One|" style="zoom:50%;" />
 
 
 

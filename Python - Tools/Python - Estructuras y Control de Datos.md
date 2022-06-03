@@ -1,4 +1,6 @@
-# Python - Datos, Control y Estructuras.
+# Python - Estructuras y control de datos.
+
+
 
 ## Iterables e Iteradores.
 
@@ -56,6 +58,16 @@ for i in text[::-1]:
 >>> h
 >>> P
 ```
+
+Para comprobar si un objeto es iterable o no podemos averiguar si dicho objeto hereda de un iterable o con el método ``isinstance()`` de la siguiente manera:
+
+````python
+from collections import Iterable
+
+print(isinstance(an_object, Iterable))
+````
+
+
 
 ### `break`
 
@@ -246,12 +258,14 @@ list(enumerate(seasons, start=1))
 [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
 ```
 
-## List comprehensions.
+## Comprehensions.
+
+### List comprehensions.
 
 Es una manera de crear, en una sola linea de código, listas de elementos en función de un objeto iterable. 
 
 ```python
-newlist = [expression fot item in iterable]
+new_list = [expression fot item in iterable]
 ```
 
 El _list comprehension_ se rellenará con el resultado de la expresión aplicada sobre el objeto iterado, contenido, obviamente, en el iterable. 
@@ -259,10 +273,34 @@ El _list comprehension_ se rellenará con el resultado de la expresión aplicada
 También es posible utilizar sentencias condicionales para modificar el comportamiento del _list comprehension_ y así solo añadir los elementos con las características que deseamos.  
 
 ```python
-newlist = [expression for item in iterable if condition == True]
+new_list = [expression for item in iterable if condition == True]
 ```
 
+Por lo tanto el resultado retornado por la expresión solo será añadido a la lista si se cumple con la condición descrita.
 
+### Sets comprehensions.
+
+Muy similares a la _list comprehension_, en realidad la lógica es exactamente igual, con la diferencia de que en vez de corchetes ``[ ]`` utilizamos llaves ``{ }``.
+
+Dado que los _sets_ no permiten datos duplicados, los elementos duplicados que intentemos añadir simplemente no lo harán.
+
+````python
+new_set = {expression for item in iterable}
+
+new_set = {expression for item in iterable if condition == True}
+````
+
+### Dict comprehension.
+
+Muy similares a la _list comprehension_, en realidad la lógica es exactamente igual, con la diferencia de que debemos especificar la _key_.
+
+````python
+new_dict = {i:j for i, j in zip(iterable_1, iterable_2)}
+````
+
+---
+
+En ciertas ocasiones, las compresiones no resultan sólo útiles por que puedan ser escritas en una sola línea de código, sino que también pueden llegar a ser más rápidas que otros métodos, por lo que es importante medir su tiempo de ejecución para saber si son una buena elección.
 
 ## dict's.
 
