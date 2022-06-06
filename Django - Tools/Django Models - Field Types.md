@@ -1,0 +1,1 @@
+# [Django Models - Field Types](https://docs.djangoproject.com/en/4.0/ref/models/fields/#autofield).

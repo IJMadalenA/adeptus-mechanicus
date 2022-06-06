@@ -405,7 +405,7 @@ for i in range(10):
 
 $\gamma$
 
- $$ \overline{x} = \frac{1}{n} \sum  \limits_{i = 1} ^{n} x_i = \frac{x_1 + x_2 + ... + x_n}{n}$$ 
+$$ \overline{x} = \frac{1}{n} \sum  \limits_{i = 1} ^{n} x_i = \frac{x_1 + x_2 + ... + x_n}{n}$$ 
 
 
 
