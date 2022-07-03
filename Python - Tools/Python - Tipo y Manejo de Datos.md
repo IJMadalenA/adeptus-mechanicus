@@ -165,80 +165,6 @@ class str(object)
  |      
  |      Raises ValueError when the substring is not found.
  |  
- |  isalpha(self, /)
- |      Return True if the string is an alphabetic string, False otherwise.
- |      
- |      A string is alphabetic if all characters in the string are alphabetic and there
- |      is at least one character in the string.
- |  
- |  isascii(self, /)
- |      Return True if all characters in the string are ASCII, False otherwise.
- |      
- |      ASCII characters have code points in the range U+0000-U+007F.
- |      Empty string is ASCII too.
- |  
- |  isdecimal(self, /)
- |      Return True if the string is a decimal string, False otherwise.
- |      
- |      A string is a decimal string if all characters in the string are decimal and
- |      there is at least one character in the string.
- |  
- |  isdigit(self, /)
- |      Return True if the string is a digit string, False otherwise.
- |      
- |      A string is a digit string if all characters in the string are digits and there
- |      is at least one character in the string.
- |  
- |  isidentifier(self, /)
- |      Return True if the string is a valid Python identifier, False otherwise.
- |      
- |      Call keyword.iskeyword(s) to test whether string s is a reserved identifier,
- |      such as "def" or "class".
- |  
- |  islower(self, /)
- |      Return True if the string is a lowercase string, False otherwise.
- |      
- |      A string is lowercase if all cased characters in the string are lowercase and
- |      there is at least one cased character in the string.
- |  
- |  isnumeric(self, /)
- |      Return True if the string is a numeric string, False otherwise.
- |      
- |      A string is numeric if all characters in the string are numeric and there is at
- |      least one character in the string.
- |  
- |  isprintable(self, /)
- |      Return True if the string is printable, False otherwise.
- |      
- |      A string is printable if all of its characters are considered printable in
- |      repr() or if it is empty.
- |  
- |  isspace(self, /)
- |      Return True if the string is a whitespace string, False otherwise.
- |      
- |      A string is whitespace if all characters in the string are whitespace and there
- |      is at least one character in the string.
- |  
- |  istitle(self, /)
- |      Return True if the string is a title-cased string, False otherwise.
- |      
- |      In a title-cased string, upper- and title-case characters may only
- |      follow uncased characters and lowercase characters only cased ones.
- |  
- |  isupper(self, /)
- |      Return True if the string is an uppercase string, False otherwise.
- |      
- |      A string is uppercase if all cased characters in the string are uppercase and
- |      there is at least one cased character in the string.
- |  
- |  join(self, iterable, /)
- |      Concatenate any number of strings.
- |      
- |      The string whose method is called is inserted in between each given string.
- |      The result is returned as a new string.
- |      
- |      Example: '.'.join(['ab', 'pq', 'rs']) -> 'ab.pq.rs'
- |  
  |  ljust(self, width, fillchar=' ', /)
  |      Return a left-justified string of length width.
  |      
@@ -338,23 +264,6 @@ class str(object)
  |      
  |      If chars is given and not None, remove characters in chars instead.
  |  
- |  split(self, /, sep=None, maxsplit=-1)
- |      Return a list of the substrings in the string, using sep as the separator string.
- |      
- |        sep
- |          The separator used to split the string.
- |      
- |          When set to None (the default value), will split on any whitespace
- |          character (including \\n \\r \\t \\f and spaces) and will discard
- |          empty strings from the result.
- |        maxsplit
- |          Maximum number of splits (starting from the left).
- |          -1 (the default value) means no limit.
- |      
- |      Note, str.split() is mainly useful for data that has been intentionally
- |      delimited.  With natural text that includes punctuation, consider using
- |      the regular expression module.
- |  
  |  splitlines(self, /, keepends=False)
  |      Return a list of the lines in the string, breaking at line boundaries.
  |      
@@ -368,11 +277,6 @@ class str(object)
  |      With optional start, test S beginning at that position.
  |      With optional end, stop comparing S at that position.
  |      prefix can also be a tuple of strings to try.
- |  
- |  strip(self, chars=None, /)
- |      Return a copy of the string with leading and trailing whitespace removed.
- |      
- |      If chars is given and not None, remove characters in chars instead.
  |  
  |  swapcase(self, /)
  |      Convert uppercase characters to lowercase and lowercase characters to uppercase.
@@ -396,11 +300,6 @@ class str(object)
  |  
  |  upper(self, /)
  |      Return a copy of the string converted to uppercase.
- |  
- |  zfill(self, width, /)
- |      Pad a numeric string with zeros on the left, to fill a field of the given width.
- |      
- |      The string is never truncated.
  |  
  |  ----------------------------------------------------------------------
  |  Static methods defined here:
@@ -744,41 +643,123 @@ True
 False
 ````
 
+````python
+ |  isalnum(self, /)
+ |      Return True if the string is an alpha-numeric string, False otherwise.
+ |
+ |      A string is alpha-numeric if all characters in the string are alpha-numeric and
+ |      there is at least one character in the string.
+````
+
 ##### [`.isalpha()`](https://docs.python.org/3/library/stdtypes.html#str.isalpha)
 
 Retorna ``True`` si todos los caracteres en el ``str`` son alfabéticos y hay al menos un carácter, retornando ``False`` en caso contrario.
+
+````python
+ |  isalpha(self, /)
+ |      Return True if the string is an alphabetic string, False otherwise.
+ |      
+ |      A string is alphabetic if all characters in the string are alphabetic and there
+ |      is at least one character in the string.
+````
 
 ##### [``.isdecimal()``](https://docs.python.org/3/library/stdtypes.html#str.isdecimal)
 
 Retorna ``True`` si todos los caracteres en el ``str`` son decimales y hay al menos un carácter, retornando ``False`` en caso contrario.
 
+````python
+ |  isdecimal(self, /)
+ |      Return True if the string is a decimal string, False otherwise.
+ |      
+ |      A string is a decimal string if all characters in the string are decimal and
+ |      there is at least one character in the string.
+````
+
 ##### [``.isdigit()``](https://docs.python.org/3/library/stdtypes.html#str.isdigit)
 
 Retorna ``True`` si todos los caracteres en el ``str`` son dígitos y hay al menos un carácter, retornando ``False`` en caso contrario.
+
+````python
+ |  isdigit(self, /)
+ |      Return True if the string is a digit string, False otherwise.
+ |      
+ |      A string is a digit string if all characters in the string are digits and there
+ |      is at least one character in the string.
+````
 
 ##### [``.isidentifier()``](https://docs.python.org/3/library/stdtypes.html#str.isidentifier)
 
 Retorna ``True`` si el ``str`` es un identificador válido según la definición de Python. [Identifiers and keywords](https://docs.python.org/3/reference/lexical_analysis.html#identifiers).
 
+````python
+ |  isidentifier(self, /)
+ |      Return True if the string is a valid Python identifier, False otherwise.
+ |      
+ |      Call keyword.iskeyword(s) to test whether string s is a reserved identifier,
+ |      such as "def" or "class".
+````
+
 ##### [``.islower()``](https://docs.python.org/3/library/stdtypes.html#str.islower)
 
 Retorna ``True`` si todos los _cased characters_[^1] en el ``str`` están en minúsculas y hay al menos un carácter, retornando ``False`` en caso contrario.
+
+````python
+ |  islower(self, /)
+ |      Return True if the string is a lowercase string, False otherwise.
+ |      
+ |      A string is lowercase if all cased characters in the string are lowercase and
+ |      there is at least one cased character in the string.
+````
 
 ##### [``.isnumeric()``](https://docs.python.org/3/library/stdtypes.html#str.isnumeric)
 
 Retorna ``True`` si todos los caracteres en el ``str`` son numéricos y hay al menos un carácter, y retornará ``False`` en el caso contrario.
 
+````python
+ |  isnumeric(self, /)
+ |      Return True if the string is a numeric string, False otherwise.
+ |      
+ |      A string is numeric if all characters in the string are numeric and there is at
+ |      least one character in the string.
+````
+
 ##### [``.isprintable()``](https://docs.python.org/3/library/stdtypes.html#str.isprintable)
 
 Retorna ``True`` si todos los caracteres en el ``str`` son imprimibles o la cadena está vacía y retornará ``False`` en caso contrario.
+
+````python
+ |  isprintable(self, /)
+ |      Return True if the string is printable, False otherwise.
+ |      
+ |      A string is printable if all of its characters are considered printable in
+ |      repr() or if it is empty.
+````
 
 ##### [``.isspace()``](https://docs.python.org/3/library/stdtypes.html#str.isspace)
 
 Retorna ``True`` si solo hay espacios en blanco conformando la totalidad del ``str`` y al menos un espacio en blanco como carácter, de lo contrario será ``False``. 
 
+````python
+ |  isspace(self, /)
+ |      Return True if the string is a whitespace string, False otherwise.
+ |      
+ |      A string is whitespace if all characters in the string are whitespace and there
+ |      is at least one character in the string.
+````
+
 ##### [``.istitle()``](https://docs.python.org/3/library/stdtypes.html#str.istitle)
 
 Retorna ``True`` si el ``str`` es _titlecased_, es decir que la primera letra de cada conjunto de caracteres dentro del ``str`` está en mayúsculas.
+
+````python
+ |  istitle(self, /)
+ |      Return True if the string is a title-cased string, False otherwise.
+ |      
+ |      In a title-cased string, upper- and title-case characters may only
+ |      follow uncased characters and lowercase characters only cased ones.
+````
+
+
 
 ##### [``.isupper()``](https://docs.python.org/3/library/stdtypes.html#str.isupper)
 
@@ -798,6 +779,16 @@ False
 False
 ````
 
+````python
+ |  isupper(self, /)
+ |      Return True if the string is an uppercase string, False otherwise.
+ |      
+ |      A string is uppercase if all cased characters in the string are uppercase and
+ |      there is at least one cased character in the string.
+````
+
+
+
 ---
 
 
@@ -813,6 +804,15 @@ Elimina a la izquierda y derecha el carácter que se ingresa. Si se llama sin pa
 texto
 ````
 
+````python
+ |  strip(self, chars=None, /)
+ |      Return a copy of the string with leading and trailing whitespace removed.
+ |      
+ |      If chars is given and not None, remove characters in chars instead.
+````
+
+
+
 #### [``.zfill()``](https://docs.python.org/3/library/stdtypes.html#str.zfill)
 
 Rellena la cadena con ceros a la izquierda hasta llegar a la longitud ingresada como parametro.
@@ -823,6 +823,15 @@ Rellena la cadena con ceros a la izquierda hasta llegar a la longitud ingresada 
 
 001234
 ````
+
+````python
+ |  zfill(self, width, /)
+ |      Pad a numeric string with zeros on the left, to fill a field of the given width.
+ |      
+ |      The string is never truncated.
+````
+
+
 
 #### [``.join(<iterable>)``](https://docs.python.org/3/library/stdtypes.html#str.join)
 
@@ -835,6 +844,18 @@ Retorna la primera cadena unida a cada uno de los elementos de la lista que se i
 1 y 2 y 3
 ````
 
+````python
+ |  join(self, iterable, /)
+ |      Concatenate any number of strings.
+ |      
+ |      The string whose method is called is inserted in between each given string.
+ |      The result is returned as a new string.
+ |      
+ |      Example: '.'.join(['ab', 'pq', 'rs']) -> 'ab.pq.rs'
+````
+
+
+
 #### [``.split(set=None, maxsplit=-1)``](https://docs.python.org/3/library/stdtypes.html#str.split)
 
 Divide una cadena en subcadenas y las retorna almacenadas en un objeto ``list``. La división es realizada de acuerdo a el primer parámetro, y el segundo parámetro indica el número máximo de divisiones a realizar.
@@ -844,6 +865,25 @@ Divide una cadena en subcadenas y las retorna almacenadas en un objeto ``list``.
 >>> print(s.split(","))
 
 ["Cadena", "de", "texto."]
+````
+
+````python
+ |  split(self, /, sep=None, maxsplit=-1)
+ |      Return a list of the substrings in the string, using sep as the separator string.
+ |      
+ |        sep
+ |          The separator used to split the string.
+ |      
+ |          When set to None (the default value), will split on any whitespace
+ |          character (including \\n \\r \\t \\f and spaces) and will discard
+ |          empty strings from the result.
+ |        maxsplit
+ |          Maximum number of splits (starting from the left).
+ |          -1 (the default value) means no limit.
+ |      
+ |      Note, str.split() is mainly useful for data that has been intentionally
+ |      delimited.  With natural text that includes punctuation, consider using
+ |      the regular expression module.
 ````
 
 
