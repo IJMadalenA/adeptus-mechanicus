@@ -86,7 +86,11 @@ Para ayudar al controlar la recopilación de información sensible, se puede des
 
 ## Configurar el _logging_.
 
+<<<<<<< HEAD
 La librería de _logging_ de Python nos provee de varias técnicas para configurar el sistema de _logging_, desde una interfaz programática hasta archivos de configuración. Por defecto Django usa el [formato dictConfig]](https://docs.python.org/3/library/logging.config.html#logging-config-dictschema).
+=======
+La librería de _logging_ de Python nos provee de varias técnicas para configurar el sistema de _logging_, desde una interfaz programática hasta archivos de configuración. Por defecto Django usa el [formato dictConfig](https://docs.python.org/3/library/logging.config.html#logging-config-dictschema).
+>>>>>>> 47e4c13bbf6162f85c82daa3eb753e6891b283cb
 
 
 
