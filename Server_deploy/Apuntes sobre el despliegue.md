@@ -43,7 +43,7 @@ Ahora, dentro del __venv__ procedemos a instalar __Django__ y todos los paquetes
 
 ```shell
 (venv) root:~$ python -m pip install Django
-(venv) root:~$ django-admin startproject <new_project>
+(venv) root:~$ django-admin startproject <django_app_name>
 (venv) root:~$ mkdir logs
 (venv) root:~$ cd <new_project>
 
@@ -74,14 +74,14 @@ Y una vez dentro del archivo copiamos los siguientes comandos:
 ```markdown
 #!/bin/bash
 
-NAME="test_django_app"  #Django application name
+NAME="<django_app_name>"  #Django application name
 DIR=/home/ubuntu/django_deploy_app/test_django_app   #Directory where project is located
 USER=ubuntu   #User to run this script as
 GROUP=ubuntu  #Group to run this script as
 WORKERS=3     #Number of workers that Gunicorn should spawn
 SOCKFILE=unix:/home/ubuntu/django_deploy_app/gunicorn.sock   #This socket file will communicate with Nginx 
 DJANGO_SETTINGS_MODULE=test_django_app.settings   #Which Django setting file should use
-DJANGO_WSGI_MODULE=test_django_app.wsgi           #Which WSGI file should use
+DJANGO_WSGI_MODULE=<django_app_name>.wsgi           #Which WSGI file should use
 LOG_LEVEL=debug
 cd $DIR
 source /home/ubuntu/django_deploy_app/venv/bin/activate  #Activate the virtual environment
@@ -115,29 +115,33 @@ Primero habilitaremos el __Supervisor__ y lo ejecutaremos con los siguientes com
 ```sh
 # Tener en cuenta que esto es desde el root del ubuntu.
 :~$ sudo systemctl enable supervisor
+	Synchronizing state of supervisor.service with SysV service script with /lib/systemd/systemd-sysv-install.
+	Executing: /lib/systemd/systemd-sysv-install enable supervisor
+
+
 :~$ sudo systemctl start supervisor
 ```
 
 Para configurar el __Supervisor__, creamos un archivo de configuración dentro de la siguiente dirección: `/supervisor/conf.d/`.
 
 ```sh
-:~$ sudo touch /etc/supervisor/conf.d/<new_project>.conf
+:~$ sudo touch /etc/supervisor/conf.d/<django_app_name>.conf
 ```
 
 Abrimos el archivo de configuración y escribimos las siguientes instrucciones en el:
 
 ```sh
-:~$ sudo nano /etc/supervisor/conf.d/<new_project>.conf
+:~$ sudo nano /etc/supervisor/conf.d/<django_app_name>.conf
 ```
 
 ```markdown
-[program:test_django_app]
+[program:<django_app_name>]
 command=/home/ismaelm/venv/bin/gunicorn_configuration
 user=sohaib
 autostart=true
 autorestart=true
 redirect_stderr=true
-stdout_logfile=/home/ubuntu/django_deploy_app/logs/gunicorn-error.log
+stdout_logfile=/home/ubuntu/<django_app_name>/logs/gunicorn-error.log
 ```
 
 Ahora debemos releer el archivo de configuración de __Supervisor__ y hacer que las nuevas configuraciones estén disponibles. Con los siguientes comandos:
@@ -146,7 +150,7 @@ Ahora debemos releer el archivo de configuración de __Supervisor__ y hacer que 
 :~$ sudo supervisorctl reread
 
 # Asegurate que el output sea más o menos así:
-<django_project>: available
+<django_app_name>: available
 ```
 
 Actualizar y reiniciar el __Supervisor__:
@@ -155,9 +159,9 @@ Actualizar y reiniciar el __Supervisor__:
 :~$ sudo supervisorctl update
 
 # output
-<django_project>: added process group
+<django_app_name>: added process group
 
-:~$ sudo supervisorctl restart <django_project>
+:~$ sudo supervisorctl restart <django_app_name>
 ```
 
 Para comprobar y verificar sus status, debemos correr el siguiente comando:

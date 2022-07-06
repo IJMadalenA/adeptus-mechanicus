@@ -2,6 +2,8 @@
 
 https://gunicorn.org/
 
+https://docs.gunicorn.org/en/latest/index.html
+
 Es un __WSGI__ de python (_Python Web Server Gateway Interface_) de servidores __HTTP__. A menudo se implementa con __NGINX__, ya que los dos tienen características complementarias. El servidor __Gunicorn__ generalmente es compatible con diversos _frameworks_ web, como __Django__, de simple implementación, ligero en su uso de recursos y bastante rápido. 
 
 
