@@ -225,3 +225,13 @@ testear vistas:
 
 ---
 
+
+
+Ideas:
+
+- herramientas de testeo.
+- Unit testing.
+- Criterios de testeo.
+- Alcance del testeo y de cada testeo.
+- Buenas practicas de calidad de software.
+- Protocolo y estructura base para testear cada estructura básica del software. 
