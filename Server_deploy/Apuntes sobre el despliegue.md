@@ -174,3 +174,49 @@ Para comprobar y verificar sus status, debemos correr el siguiente comando:
 
 ## NGINX Configuración.
 
+
+
+
+
+
+
+---
+
+## Protocolos Qaleon.
+
+### Desplegar el Front-End.
+
+
+***Accesos del servidor PRE ****
+IP: 172.104.248.103
+User: ++++
+Password: ++++
+
+*********************************
+***Pasos
+\1. Ingresar por ssh => ssh [user]@[ip]
+\2. Despliegue
+2.1 Manual
+2.1.1 Visualizar carpetas del usuario deploy e ingresar a la carpeta repo
+2.1.2 Comprobar rama git branch, descargar cambios con git pull, ejecutar comando npm run build
+2.2 Automatico mediante script SH
+2.2.1 Ir a la carpeta scripts
+2.2.2 (opcional) Comprobar comandos a ejecutar::: nano [archivo sh]
+2.2.3 Ejecutar comando::: sh [archivo sh]
+
+
+
+#### MEJORAS.
+Solicitar usuarios para hacer despliegues
+
+
+
+
+
+##
+
+setiings tiene obligatiriamente ser un settings .py.
+
+
+
+CONECTAR CON DEPLOY AL SERVIDOR DE TEST. 
