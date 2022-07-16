@@ -66,7 +66,7 @@ working_branch ->> dev_branch: push y merge request.
 
 ## Dependencias.
 
-Si bien las migraciones son por aplicación, las tablas y relaciones implícitas en los modelos son demasiado complejas como para crear una app a la vez, ya que si tenemos un modelo son una _ForeignKey_, se debe verificar la tabla referenciada primero, ya que si Django identifica que la tabla referenciada no existe retornará un error.
+Si bien las migraciones son por aplicación, las tablas y relaciones implícitas en los modelos son demasiado complejas como para analizar una app a la vez, ya que si tenemos un modelo con una _ForeignKey_, se debe verificar la tabla referenciada primero, ya que si Django identifica que la tabla referenciada no existe retornará un error.
 
 ## Añadir migraciones a una aplicación especifica.
 

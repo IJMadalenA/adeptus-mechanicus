@@ -107,3 +107,18 @@ print(a)
 # Salida: NameError: name 'a' is not defined
 ```
 
+## Variables de 'Solo Lectura'.
+
+Al realizar una operación en Python, en el modo interactivo, en la que no definimos una variable que la contenga sino que simplemente la ejecutamos suelta en el interprete, esta se asigna a la variable `_`. 
+
+```python
+>>> tax = 12.5 / 100
+>>> price = 100.50
+12.5625
+>>> price + _
+113.0625
+>>> rount(_,2)
+113.06
+```
+
+Esta variable debe ser tratada como de 'sólo lectura' por el usuario. No le asignes explícitamente un valor; ya que crearás una variable local independiente con el mismo nombre enmascarando la variable con el comportamiento mágico.

@@ -5,12 +5,20 @@
 ### Entrar a la consola de Postgres.
 
 ```postgresql
-psql - d <base_dat-U <user_name> -W
+psql -d <data_base> -U <user_name> -W
 ```
 
 ``` postgresql
 sudo su - postgres
 psql
+```
+
+---
+
+```
+$ sudo su - postgres
+
+~$ psql <table_name>
 ```
 
 
@@ -45,6 +53,12 @@ psql
 
 ```postgresql
 \d <nombre_tabla>
+```
+
+### Lista de usuarios.
+
+```
+\du
 ```
 
 ### Ver todos los comandos SQL.
