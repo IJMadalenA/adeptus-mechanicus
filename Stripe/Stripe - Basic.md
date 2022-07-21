@@ -325,8 +325,16 @@ class Membership(models.Model):
         on_delete=models.SET_NULL,
         help_text="The member's Stripe Customer object for this team, if it exists"
     )
-    
+ 
 ```
+
+
+
+
+
+
+
+---
 
 ## Creando suscripciones.
 
