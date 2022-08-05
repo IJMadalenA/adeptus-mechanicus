@@ -63,12 +63,6 @@ Como definir un variable de tipo `str`:
 
 > Las cadenas definidas con triples comillas, tanto simple como dobles, pueden incluir varias lineas. Todos los espacios en blanco incluidos se incorporan a la cadena de forma literal.
 
-```python
->>> 
-```
-
-
-
 ---
 
 ### [Numérico](https://docs.python.org/es/3/library/stdtypes.html#numeric-types-int-float-complex).
@@ -81,28 +75,24 @@ Python soporta completamente una aritmética mixta: Cuando un operador binario d
 
 Todos los tipos numéricos, exceptuando a los de tipo `complex`, soportan las siguientes operaciones:
 
-| Operación      | Resultado                                          | Documentación completa                                       |
-| :------------- | :------------------------------------------------- | :----------------------------------------------------------- |
-| `x + y`        | suma de *x* e *y*                                  |                                                              |
-| `x - y`        | resta de *x* e *y*                                 |                                                              |
-| `x * y`        | multiplicación de *x* por *y*                      |                                                              |
-| `x ** y`       | *x* elevado a *y*                                  |                                                              |
-| `x / y`        | división de *x* por *y*                            |                                                              |
-| `x // y`       | división entera de *x* por *y*                     |                                                              |
-| `x % y`        | resto o residuo de *x* por *y*                     |                                                              |
-| `-x`           | valor de *x*, negado                               |                                                              |
-| `+x`           | valor de *x*, sin cambiar                          |                                                              |
-| `abs(x)`       | valor absoluto de la magnitud de *x*               | [`abs()`](https://docs.python.org/es/3/library/functions.html#abs) |
-| `int(x)`       | valor de *x* convertido a entero                   | [`int()`](https://docs.python.org/es/3/library/functions.html#int) |
-| `float(x)`     | valor de *x* convertido a número de punto flotante | [`float()`](https://docs.python.org/es/3/library/functions.html#float) |
-| `divmod(x, y)` | el par de valores `(x // y, x % y)`                | [`divmod()`](https://docs.python.org/es/3/library/functions.html#divmod) |
-| `pow(x, y)`    | *x* elevado a *y*                                  | [`pow()`](https://docs.python.org/es/3/library/functions.html#pow) |
+| Operación      | Resultado                                             | Documentación completa                                       |
+| :------------- | :---------------------------------------------------- | :----------------------------------------------------------- |
+| `x + y`        | suma de *x* e *y*                                     |                                                              |
+| `x - y`        | resta de *x* e *y*                                    |                                                              |
+| `x * y`        | multiplicación de *x* por *y*                         |                                                              |
+| `x ** y`       | *x* elevado a *y*                                     |                                                              |
+| `x / y`        | división de *x* por *y*                               |                                                              |
+| `x // y`       | división entera de *x* por *y*                        |                                                              |
+| `x % y`        | operador __modulo__. Resto o residuo de *x* entre *y* |                                                              |
+| `-x`           | valor de *x*, negado                                  |                                                              |
+| `+x`           | valor de *x*, sin cambiar                             |                                                              |
+| `abs(x)`       | valor absoluto de la magnitud de *x*                  | [`abs()`](https://docs.python.org/es/3/library/functions.html#abs) |
+| `int(x)`       | valor de *x* convertido a entero                      | [`int()`](https://docs.python.org/es/3/library/functions.html#int) |
+| `float(x)`     | valor de *x* convertido a número de punto flotante    | [`float()`](https://docs.python.org/es/3/library/functions.html#float) |
+| `divmod(x, y)` | el par de valores `(x // y, x % y)`                   | [`divmod()`](https://docs.python.org/es/3/library/functions.html#divmod) |
+| `pow(x, y)`    | *x* elevado a *y*                                     | [`pow()`](https://docs.python.org/es/3/library/functions.html#pow) |
 
 [Lista de la prioridad de los operadores](https://docs.python.org/es/3/reference/expressions.html#operator-summary)
-
-#### `int`.
-
-
 
 ---
 
@@ -138,14 +128,6 @@ Existen ocho operadores de comparación en Python, compartiendo todos la misma p
 > El comportamiento de los operadores `is` e `is not` no se puede personalizar; ademas, nunca lanzará una excepción, no importa que objetos se estén comparando.
 
 > Hay otras dos operaciones con la misma prioridad sintáctica: `in` y `not in`, que son soportadas por aquellos tipos de datos que son de tipo __iterable__.
-
-
-
----
-
-### Nulo.
-
-
 
 ---
 
