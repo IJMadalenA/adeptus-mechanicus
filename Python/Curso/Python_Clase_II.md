@@ -57,7 +57,7 @@ En Python toda la información textual se representa como un objeto `str`.
 Como definir un variable de tipo `str`:
 
 - Comillas simples: `'Permite incluir comillas "dobles".'`
-- Comillas dobles: `"Permite inlcuir comillas 'simples'."`
+- Comillas dobles: `"Permite incluir comillas 'simples'."`
 - Triple comillas simples: `'''Triple comillas simples.'''`
 - Triple comillas dobles: `"""Triple comillas dobles."""` 
 
