@@ -437,7 +437,7 @@ Para dejar de ingresar el usuario y la contraseña cada vez que ejecutemos un `p
 
 1. Dentro del directorio que contiene el repositorio.
 2. buscamos el archivo `remote.origin.url` utilizando el comando: `git config -l`.
-3. Ejecutamos el comando: `git config remote.origin.url https://{YOUR_USER_NAME}:{PASSWORD}@github.com/{YOUR_USER_NAME}/{REPOSITORY_NAME}.git`.
+3. Ejecutamos el comando: `git config remote.origin.url https://{YOUR_USER_NAME}: PASSWORD}@github.com/{YOUR_USER_NAME}/{REPOSITORY_NAME}.git`.
 
 
 ---
